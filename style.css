@@ -360,6 +360,17 @@ footer {
     font-style: italic;
 }
 
+.rtf-text a {
+    color: #fff;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.rtf-text a:hover {
+    text-decoration: underline;
+}
+
 .rtf-text ul {
     margin: 0.8rem 0;
     padding-left: 1.5rem;

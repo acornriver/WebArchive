@@ -124,13 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
             html = html.replace(/^## (.*?)$/gm, '<h4>$1</h4>');
             html = html.replace(/^# (.*?)$/gm, '<h3>$1</h3>');
             
+            // Convert markdown links [text](url)
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+            
             // Convert bold
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
             
-            // Convert italic (but not ** or __)
+            // Convert italic - ONLY ** wrapped text, not single underscores
             html = html.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
-            html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
             
             // Convert horizontal rules
             html = html.replace(/^-{3,}$/gm, '<hr>');
@@ -156,12 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Convert YouTube links to embed HTML
+    // Convert links (YouTube embeds + regular links)
     function processYouTubeLinks(text) {
-        // Match various YouTube URL formats
+        // First, convert YouTube links to embeds
         const youtubeRegex = /https?:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|shorts\/)?([a-zA-Z0-9_-]{11})/g;
         
-        return text.replace(youtubeRegex, (match) => {
+        text = text.replace(youtubeRegex, (match) => {
             // Extract video ID
             const videoIdMatch = match.match(/(?:v=|\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
             if (!videoIdMatch || !videoIdMatch[1]) return match;
@@ -169,6 +171,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const videoId = videoIdMatch[1];
             return `<div class="youtube-container"><iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen loading="lazy"></iframe></div>`;
         });
+        
+        // Then convert remaining URLs to links (only http/https that start on new line or after space)
+        const urlRegex = /(?:^|\s)(https?:\/\/[^\s<>]+)/gm;
+        text = text.replace(urlRegex, (match, url) => {
+            // Skip if already in an iframe or HTML tag
+            if (url.includes('youtube.com/embed') || url.includes('iframe')) return match;
+            const prefix = match.startsWith(' ') ? ' ' : '';
+            return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        });
+        
+        return text;
     }
 
     // Load markdown file dynamically
