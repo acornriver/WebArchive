@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'p12', title: '12 스며듦', year: '2024', category: 'Music / Release', thumbnail: 'asset/WebIndependence/12스며듦 음악 발매/스며듦_썸네일 2025, acornriver.png', images: ['asset/WebIndependence/12스며듦 음악 발매/스며듦1.jpeg'], rtf: 'asset/WebIndependence/12스며듦 음악 발매/스며듦 txt.rtf' },
         { id: 'p13', title: '13 봄에피는초록이라는언어', year: '2025', category: 'Book / Publication', thumbnail: 'asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄에피는초록이라는언어_썸네일 2025, acornriver.png', images: ['asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄피언1.png','asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄피언2.png'], rtf: 'asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄에피는초록이라는언어 txt.rtf' },
         { id: 'p14', title: '14 빛의 언어', year: '2025', category: 'Research / Installation', thumbnail: 'asset/WebIndependence/14 빛의 언어/빛의언어_썸네일 2025, acornriver.png', images: ['asset/WebIndependence/14 빛의 언어/빛의언어1.png','asset/WebIndependence/14 빛의 언어/빛의언어2.png'], rtf: 'asset/WebIndependence/14 빛의 언어/빛의언어 txt.rtf' },
-        { id: 'p15', title: '15 다민프로젝트 01', year: '2025', category: 'Project', thumbnail: 'asset/WebIndependence/15다민프로젝트 01/다민프로젝트01_썸네일 2025, acornriver, daon.png', images: ['asset/WebIndependence/15다민프로젝트 01/다민1.png','asset/WebIndependence/15다민프로젝트 01/다민2.png','asset/WebIndependence/15다민프로젝트 01/다민3.png','asset/WebIndependence/15다민프로젝트 01/다민4.png'], rtf: 'asset/WebIndependence/15다민프로젝트 01/다민프로젝트 01.rtfd/TXT.rtf' },
+        { id: 'p15', title: '15 다민프로젝트 01', year: '2025', category: 'Project', thumbnail: 'asset/WebIndependence/15다민프로젝트 01/다민프로젝트01_썸네일 2025, acornriver, daon.png', images: ['asset/WebIndependence/15다민프로젝트 01/다민1.png','asset/WebIndependence/15다민프로젝트 01/다민2.png','asset/WebIndependence/15다민프로젝트 01/다민3.png','asset/WebIndependence/15다민프로젝트 01/다민4.png'] },
     ];
 
     const projectList = document.getElementById('project-list');
@@ -24,17 +24,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBody = document.getElementById('modal-body');
     const infoBtn = document.getElementById('info-btn');
 
-    // Load project texts from JSON
+    // Map project titles to their markdown file paths
+    const projectMarkdownMap = {
+        '00 파인딩 마이 패스': 'asset/WebIndependence/00파인딩 마이 패스/파인딩 마이 패스.md',
+        '01 자아분열': 'asset/WebIndependence/01자아분열/자아분열.md',
+        '02 A ball': 'asset/WebIndependence/02A ball/A ball.md',
+        '03 모잊그너슬': 'asset/WebIndependence/03모잊그너슬/모잊그너슬.md',
+        '04 미리별': 'asset/WebIndependence/04미리별/미리별.md',
+        '05 우쥬여행 앨범 발매': 'asset/WebIndependence/05우쥬여행 앨범 발매/우쥬여행.md',
+        '06 전음 배경영상': 'asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상.md',
+        '07 모서리인간': 'asset/WebIndependence/07모서리인간/모서리인간.md',
+        '08 철의 언어': 'asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/디지털기반의 인스톨레이션.md',
+        '09 펑 니 풍선 터지는 소리': 'asset/WebIndependence/09펑니풍선터지는소리/펑 니 풍선 터지는 소리.md',
+        '10 연산적시': 'asset/WebIndependence/10연산적시/연산적시.md',
+        '11 오브메모리오브': 'asset/WebIndependence/11오브메모리오브/오브메모리오브.md',
+        '12 스며듦': 'asset/WebIndependence/12스며듦 음악 발매/스며듦.md',
+        '13 봄에피는초록이라는언어': 'asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄에피는초록이라는언어.md',
+        '14 빛의 언어': 'asset/WebIndependence/14 빛의 언어/빛의언어.md',
+        '15 다민프로젝트 01': 'asset/WebIndependence/15다민프로젝트 01/다민프로젝트 01.md',
+        'Curriculum Vitae': 'asset/WebIndependence/CV/ acornriver CV.md'
+    };
+
+    // Cache for loaded markdown content
     let projectTexts = {};
-    fetch('projects_text.json')
-        .then(r => r.json())
-        .then(data => {
-            projectTexts = data;
-            console.log('✓ Project texts loaded:', Object.keys(data).length);
-        })
-        .catch(err => {
-            console.error('Failed to load project texts:', err);
-        });
 
     // Render project list with thumbnails
     projects.forEach(project => {
@@ -159,8 +171,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Load markdown file dynamically
+    async function loadProjectMarkdown(title) {
+        const mdPath = projectMarkdownMap[title];
+        if (!mdPath) {
+            console.error('Markdown path not found for:', title);
+            return null;
+        }
+
+        if (projectTexts[title]) {
+            return projectTexts[title];
+        }
+
+        try {
+            const response = await fetch(mdPath);
+            if (!response.ok) {
+                throw new Error(`Failed to load: ${response.statusText}`);
+            }
+            const content = await response.text();
+            projectTexts[title] = content;
+            return content;
+        } catch (err) {
+            console.error('Error loading markdown:', mdPath, err);
+            return null;
+        }
+    }
+
     // Project click event
-    projectList.addEventListener('click', (e) => {
+    projectList.addEventListener('click', async (e) => {
         e.preventDefault();
         const link = e.target.closest('a');
         if (!link) return;
@@ -178,20 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .join('');
             const closeBtnHtml = `<button class="close-btn" aria-label="Close modal">×</button>`;
 
-            // Get text from pre-loaded JSON data
-            let textKey;
-            if (project.id === 'cv') {
-                textKey = 'CV';
-            } else {
-                // Remove space after number
-                textKey = project.title;
-            }
-            
-            const plaintext = projectTexts[textKey];
+            // Load markdown from file
+            const plaintext = await loadProjectMarkdown(project.title);
             if (!plaintext) {
-                console.error('Text not found for key:', textKey);
-                console.error('Available keys:', Object.keys(projectTexts));
-                modalBody.innerHTML = `${closeBtnHtml}<h2>${project.title}</h2><p style="color:#999;">설명을 불러올 수 없습니다. (Key: ${textKey})</p>`;
+                modalBody.innerHTML = `${closeBtnHtml}<h2>${project.title}</h2><p style="color:#999;">설명을 불러올 수 없습니다.</p>`;
             } else {
                 // Convert markdown to HTML
                 const textHTML = markdownToHtml(plaintext);
@@ -210,17 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Info button click
-    infoBtn.addEventListener('click', (e) => {
+    // Info button click (CV)
+    infoBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         
         const infoBodyDiv = infoModal.querySelector('#info-body');
         const closeBtnHtml = `<button class="close-btn" aria-label="Close modal">×</button>`;
 
         try {
-            const cvMarkdown = projectTexts['CV'];
+            const cvMarkdown = await loadProjectMarkdown('Curriculum Vitae');
             if (!cvMarkdown) {
-                throw new Error('CV content not found in projectTexts.');
+                throw new Error('CV content not found.');
             }
             
             const cvHtml = markdownToHtml(cvMarkdown);

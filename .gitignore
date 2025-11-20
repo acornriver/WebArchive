@@ -1,0 +1,28 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node/Python development
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Development files
+server.py
+convert_rtf.py
+projects_text.json
