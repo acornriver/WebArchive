@@ -4,9 +4,9 @@ minhyuk@acornriver.work
 
 instagram: acornriver_
 
-youtube
-
-blog
+[youtube](youtube.com/@acornriver)
+-
+[blog](www.aconriver.net)
 
 
 
