@@ -1,0 +1,29 @@
+acornriver,
+2024
+
+
+https://www.youtube.com/watch?v=i8iaFYOg3AM
+
+
+ⓒ 2025. acornriver All rights reserved.
+
+
+펑! (니 풍선 터지는 소리)
+
+사람이 다가오면 풍선이 숨을 들이마신다.
+조금 더, 조금 더, 끝까지.
+그리고 터진다.
+
+가까워지는 마음, 차오르는 긴장,
+그리고 피할 수 없는 순간에 대한 기록.
+
+그리고 그 뒤에서 열일하는 장치(초음파 센서, 듀얼 모터)에 대한 고찰
+—
+
+Pyeong (The Sound of Your Balloon Bursting)
+When someone approaches, the balloon inhales.
+A little more, a little more, until the very end.
+And then it bursts.
+
+A record of closeness, rising tension,
+and the moment you cannot avoid.

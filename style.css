@@ -1,0 +1,635 @@
+/* ========================================
+   Modern Designer Portfolio CSS
+   ======================================== */
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    background-color: #0a0a0a;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 3rem 4rem;
+    background-color: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.tagline {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: #888;
+    letter-spacing: 0.05em;
+}
+
+.header-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #aaa;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+main {
+    flex-grow: 1;
+    padding: 3rem 4rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 4rem;
+    font-size: 0.85rem;
+    color: #555;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #000;
+}
+
+/* Projects Grid */
+.projects-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.projects-grid li {
+    position: relative;
+    overflow: hidden;
+    background-color: #111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.projects-grid li:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+}
+
+.projects-grid a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Project Thumbnail */
+.project-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.projects-grid li:hover .project-thumbnail img {
+    transform: scale(1.08);
+}
+
+/* Project Info */
+.project-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.project-category {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #888;
+    text-transform: uppercase;
+    flex-grow: 1;
+}
+
+.project-year {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #666;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.modal.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.modal-content {
+    background-color: #0f0f0f;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    padding: 3rem;
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+    color: #fff;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modal-content--cv {
+    max-width: 700px;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    color: #888;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 32px;
+    font-weight: 300;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.close-btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 2px;
+}
+
+/* Modal Content */
+#modal-body h2,
+#info-body h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+#modal-body p,
+#info-body p {
+    margin: 1rem 0;
+    line-height: 1.8;
+    color: #ddd;
+}
+
+.rtf-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #ccc;
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    border-left: 2px solid rgba(100, 181, 246, 0.3);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.rtf-text p {
+    margin: 0.8rem 0;
+    line-height: 1.8;
+}
+
+.rtf-text h3,
+.rtf-text h4,
+.rtf-text h5 {
+    margin: 1.5rem 0 0.8rem 0;
+    color: #64b5f6;
+    font-weight: 600;
+}
+
+.rtf-text h3 {
+    font-size: 1.3rem;
+}
+
+.rtf-text h4 {
+    font-size: 1.15rem;
+}
+
+.rtf-text h5 {
+    font-size: 1rem;
+}
+
+.rtf-text strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.rtf-text em {
+    color: #90caf9;
+    font-style: italic;
+}
+
+.rtf-text ul {
+    margin: 0.8rem 0;
+    padding-left: 1.5rem;
+}
+
+.rtf-text li {
+    margin: 0.4rem 0;
+    list-style-type: disc;
+}
+
+.rtf-text hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+}
+
+a[download] {
+    color: #aaa;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+a[download]:hover {
+    color: #fff;
+}
+
+/* Image Gallery */
+.image-gallery {
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.image-gallery img:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Body state when modal is open */
+body.details-open {
+    overflow: hidden;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    header {
+        padding: 2.5rem 2.5rem;
+    }
+
+    main {
+        padding: 2.5rem 2.5rem;
+    }
+
+    footer {
+        padding: 1.5rem 2.5rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .header-left h1 {
+        font-size: 2rem;
+    }
+
+    .modal-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .header-left h1 {
+        font-size: 1.75rem;
+    }
+
+    .tagline {
+        font-size: 0.85rem;
+    }
+
+    .header-nav {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    main {
+        padding: 2rem 1.5rem;
+    }
+
+    footer {
+        padding: 1rem 1.5rem;
+        font-size: 0.75rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .project-thumbnail {
+        height: 220px;
+    }
+
+    .project-info {
+        padding: 1rem;
+    }
+
+    .project-title {
+        font-size: 1rem;
+    }
+
+    .project-category {
+        font-size: 0.7rem;
+    }
+
+    .project-year {
+        font-size: 0.7rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+
+    #modal-body h2,
+    #info-body h2 {
+        font-size: 1.5rem;
+    }
+
+    .rtf-text {
+        font-size: 0.85rem;
+        padding: 1rem;
+    }
+
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .close-btn {
+        top: 1rem;
+        right: 1rem;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1.5rem 1rem;
+    }
+
+    .header-left h1 {
+        font-size: 1.3rem;
+    }
+
+    .tagline {
+        font-size: 0.75rem;
+    }
+
+    main {
+        padding: 1.5rem 1rem;
+    }
+
+    footer {
+        padding: 1rem;
+        font-size: 0.7rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .project-thumbnail {
+        height: 180px;
+    }
+
+    .project-info {
+        padding: 0.75rem;
+    }
+
+    .project-title {
+        font-size: 0.9rem;
+    }
+
+    .project-category,
+    .project-year {
+        font-size: 0.65rem;
+    }
+
+    .modal-content {
+        width: 98%;
+        padding: 1rem;
+    }
+
+    #modal-body h2,
+    #info-body h2 {
+        font-size: 1.25rem;
+    }
+
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+/* YouTube Embed Styles */
+.youtube-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    background: #000;
+}
+
+.youtube-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.youtube-link {
+    display: inline-block;
+    color: #64b5f6;
+    text-decoration: underline;
+    margin: 0.5rem 0;
+    word-break: break-all;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>acornriver — digital artist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>acornriver</h1>
+                <p class="tagline">digital artist</p>
+            </div>
+            <nav class="header-nav">
+                <a href="#" id="info-btn" class="nav-link">CV</a>
+            </nav>
+        </header>
+
+        <main>
+            <ul id="project-list" class="projects-grid">
+                <!-- Projects will be injected here by JavaScript -->
+            </ul>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 acornriver. All rights reserved.</p>
+        </footer>
+
+        <div id="project-detail-modal" class="modal" aria-hidden="true" role="dialog">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Close modal">&times;</button>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+
+        <div id="info-modal" class="modal" aria-hidden="true" role="dialog">
+            <div class="modal-overlay"></div>
+            <div class="modal-content modal-content--cv">
+                <button class="close-btn" aria-label="Close modal">&times;</button>
+                <div id="info-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+acornriver
+2024
+
+https://www.youtube.com/watch?v=lrTWpLKEgFU
+
+
+낑기고 낑겨 겨우 남겨진 내 마지막 공간 모서리에서조차 나는 버티지 못하고 그만 튕겨져 나왔다. 아니, 어쩌면 내 자유를 찾아간 것일지도
