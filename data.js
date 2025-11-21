@@ -1,0 +1,266 @@
+export const projects = [
+    {
+        "id": "p0",
+        "title": "00 파인딩 마이 패스",
+        "year": "2021",
+        "category": "Sound / Movie",
+        "thumbnail": "asset/WebIndependence/00파인딩 마이 패스/파인딩 마이 패스_썸네일 2021, acornriver.jpg",
+        "images": [
+            "asset/WebIndependence/00파인딩 마이 패스/파마패1.png",
+            "asset/WebIndependence/00파인딩 마이 패스/파마패2.png",
+            "asset/WebIndependence/00파인딩 마이 패스/파마패3.png",
+            "asset/WebIndependence/00파인딩 마이 패스/파마패4.png"
+        ],
+        "description": "2023\nacornriver\n\n\nhttps://www.youtube.com/watch?v=Pz0igmhbjWw\n\n\nⓒ 2025. acornriver All rights reserved.\n\n인생을 결정할 시기인 고3이 된 민혁은 카메라를 들고 자신의 길을 찾는 영상을 찍기 시작한다. 첫 번째로는 자신의 길이 어디에서부터 생겼는지. 두 번째로는 자신의 길을 어떻게 걸어야 하는지. 세 번째로는 어떻게 아름다운 길을 걸을 수 있는지, 네 번째로는 길을 걷는 방법에 대해 탐구하는 모습을 민혁은 영화를 찍으며 깨닫게 된다.\n\n-제작지원\n\n강기형, \n이은경\n\n출연\n\n강민혁, \n박주헌, \n강기형, \n이은경, \n신강철, \n이루다\n\n음악 제공\n\n이루다 \n\n– \n20210218,\n있지, \n물어봤어-,\n산호, \n숨,\n항상 같은 존재로 남도록,\nFinding My Way\n\nost\n\n\n촬영 도움\n\n강기형, \n이루다, \n신강철\n\n\n기획, 연출, 촬영, 편집\n\n강민혁\n\n\n번역\n\n이루다\n\n\n감독\n\n강민혁\n\n\n[수상내역]\n\n부산국제어린이청소년영화제 BIKY 리본더비키 상영작"
+    },
+    {
+        "id": "p1",
+        "title": "01 자아분열",
+        "year": "2023",
+        "category": "Short Film, Media Art",
+        "thumbnail": "asset/WebIndependence/01자아분열/자아분열_썸네일 2023, acornriver.png",
+        "images": [
+            "asset/WebIndependence/01자아분열/자아분열1.png",
+            "asset/WebIndependence/01자아분열/자아분열2.png",
+            "asset/WebIndependence/01자아분열/자아분열3.png"
+        ],
+        "description": "2023\nacornriver\n\n\nhttps://www.youtube.com/watch?v=vMkRL9LRjck\n\n\nⓒ 2025. acornriver All rights reserved.\n[2023] 자아분열 - 강민혁(acornriver), 인스톨레이션\n\n[콘텐츠 기획 배경 및 목적]\n\n- 어릴 적 나는 남의 눈치를 많이 보고 또 남의 좋은 점이 있다면 그것을 따라하는 행동이 많았다. 한 예시로 초등학교 시절 어떤 친구의 사과하는 모습이 너무 멋있어서 그 친구에게 다가가 “사과 한번 해주면 안돼?” “엥? 사과를 하라고?” 하며 과자를 사주기도하고 며칠동안 쫓아다니다 결국 “미안해”라는 말을 듣고 그 친구의 말투나 자세를 배우기도 했을 만큼 엉뚱한 나의 자아는 늘 어떤 행동이나 말투를 따라하기만 하는 앵무새에 가까웠다.그러다 보니 여러 갈래의 자아가 늘 내면에선 충돌하기 일수였고 더 나아가 “진짜 내가 원해서 행동하는 게 무엇일까.”하는 고민을 자주 했다. 그렇기에 나오는 나의 어색한 행동들, 그것은 스스로를 늘 부끄럽게 만들기 일수였다.\n\n-----\n\n[콘텐츠 구현 계획]\n\n- 본 작품 ‘자아분열’은 그런 제 내면의 충돌과 부끄러운 모습을 포토샵 생성형 AI와 터치디자이너, 그리고 로직을 사용하여 제작되었다. 자아분열에서는 어디에서나 볼 수 있을법한 돌멩이 하나가 모니터 앞에 전시되어 있다. 동시에 모니터에선 같은 돌멩이가 생성형 AI로 만들어진 배경 9개와 실제 배경 1개가 순차적으로 바뀌며 재생되고 있다. 더 나아가 실시간 카메라로 받아오는 돌멩이 이미지 또한 합성되어 재생되고 있다. 이는 현제 내 모습이 어쩌면 내 진짜 자아보다 남들로부터 가져온 가짜 자아가 더 많다는 것을 의미할지 모른다. 그리고 앞에 준비된 마이크에 여러가지 말을 하도록 유도한다. 마이크는 입력 값(볼륨의 크기)을 받아 화면에 출력되는 돌멩이를 상하로 찢어버리기 시작한다. 이로서 체험자는 자연 어디에나 존재하는 돌멩이가 실은 가상의 세계(가짜 자아) 속에서 여러 갈래에서 존재하며 혹은 자신이 그 가상의 세계(가짜 자아)와 돌멩이조차 찢어버릴 수 있는 존재라는 것을 인식하게 된다. 음악 또한 ‘playbox’라는 추가 소프트웨어를 통해 제작되었는데, 이 소프트웨어의 큰 특징 중 하나가 ‘주사위’ 버튼을 클릭하여 무작위로 생성된 노트와 코드를 통해 음악을 연주할 수 있게 된다.이 또한 무작위로 만나 생성된 나의 여러 자아들, 그리고 그걸 연주하고 있는 본인의 모습과 닮아 있다는 생각을 해본다.\n\n[도움을 준 사람들]\n\n문준석 교수님 지도경 동기"
+    },
+    {
+        "id": "p2",
+        "title": "02 A ball",
+        "year": "2023",
+        "category": "Unreal Engine Art",
+        "thumbnail": "asset/WebIndependence/02A ball/A ball_썸네일 2023, acornriver.png",
+        "images": [
+            "asset/WebIndependence/02A ball/A ball1.png",
+            "asset/WebIndependence/02A ball/A ball2.png",
+            "asset/WebIndependence/02A ball/A ball3.png"
+        ],
+        "description": "[2023] Aball - 강민혁(acornriver), \n미디어파사드,\n한국영상대학교 본관 1층 전시 작품\n\nhttps://www.youtube.com/watch?v=v-Kn2Efj3qs\n\n[콘텐츠 기획 배경 및 목적]\n\n- 내가 알던 기존의 예술은 거의 대부분 단방향으로 이루어진 예술이었다. 창작자가 존재하고, 소비자가 존재한다. 설명하는 사람이 존재하고, 설명을 듣는 사람이 존재했다. 그러나 나는 이런 내가 알고있는 일방적인 예술의 틀을 깨는 시도를 해보고 싶었다. 창작자와 소비자가 아닌, 작가와 관람인. 더 나아가 인간대 인간이 무한으로 소통하고 느끼는 소통의 장을 만들고 싶었다.\n\n[콘텐츠 구현 계획]\n\n- 콘텐츠에서 처음에 공은 관람인의 흥미를 끌며 시작한다. 빛이 나는 공은 좌 우로 움직이며 사람들의 시선을 끈다. 이후 그 공은 커다란 눈 모양으로 변하며 좌우를 살피는 듯한 모양으로 변한다. 이후 영상에 작곡한 음악을 입힌다. 그리고 이루어지는 작가, 작품, 관람인의 삼자대면. 그 공간에서의 상호작용이 무척이나 궁금하다.\n\n[도움을 준 사람들]\n\n문준석 교수님 박다온 후배님\n\nⓒ 2025. acornriver All rights reserved."
+    },
+    {
+        "id": "p3",
+        "title": "03 모잊그너슬",
+        "year": "2023",
+        "category": "VR Artwork",
+        "thumbnail": "asset/WebIndependence/03모잊그너슬/모잊그너슬, 모두잊혀저가는게사실이라면그건너무슬프니까_썸네일 2023, acornriver.png",
+        "images": [
+            "asset/WebIndependence/03모잊그너슬/모잊그너슬1.png",
+            "asset/WebIndependence/03모잊그너슬/모잊그너슬2.png",
+            "asset/WebIndependence/03모잊그너슬/모잊그너슬3.png"
+        ],
+        "description": "[2023] 모잊그너슬 - 강민혁(acornriver), VR체험\n\nhttps://www.youtube.com/watch?v=X96fw5bS6t4\n\n\n[콘텐츠 기획 배경 및 목적]\n\n- 가장 원초적인 예술은 무엇일까? 라는 고민을 한 적이 있다. 그 고민의 나름대로의 답은 아마 글, 음악 이었다. 그렇게 시작된 글쓰기와 음악작업을 이어가던 중 그렇다면 반대로 가장 최신의, 근방의 예술은 무엇일까? 라는 고민을 해보았다. 답은 정말 다양했다. 그리고 나는 그 중 VR 체험 예술을 선택해보기로 하였다.\n\n[콘텐츠 개발 과정]\n\n- 나의 창작글, '모두 잊혀져가는게 사실이라면 그건 넘 슬프니까'(이하 모잊그너슬)를 기반으로 제작하기로 하였다. 먼저 글을 낭독하고, 그 위에 음악을 입혔다. 이후 언리얼엔진을 사용해 오디오 반응 파티클을 만들어주고 스위치에 손이 닿는 것이 인식된다면 음악을 재생하도록 코딩하였다.\n\n[도움을 준 사람들]\n\n문준석 교수님\n\nⓒ 2025. acornriver All rights reserved.\n\n\n\n끝없이 찾아오는 절망 속에도 하나의 웃음을 잃지 않기 위해 당신을 사랑하고 당신을 기억하고 있는 걸요. 이 모든 게 실은 제 기억 속에만 머무는 하나의 가상 세계일지 몰라도 당신과 나는 원격으로 현전 하며 서로를 마주 보고 웃을 거예요. 서로를 마주 보고 안아줄 거예요. 안아주고는 같이 울어버릴지 몰라요. 당신의 폼에 꽈악 하고 안겨서는 당신의 팔에 제 눈물을 닦아내도 용서해 주시길 바라요. 사랑해요. 사랑이란 뭘까요, 제가 당신을 잊지 않고 마음속에서 영원이 이 설렘을 기억하는 일 또한 사랑이라고 할 수 있는 거 아닐까요. 그런 작은 기억들이 모여서 결국은 큰 기억을 만들어내고, 그 기억이 결국은 거대한 인류의 감정 자체를 움직이는 원동력이 되는 거 아닐까요. 사람과 사람은 이어져있지 않은 것 같으면서도 실은 긴밀하게 연결되어 있어요. 실은 전 다 봐버렸어요. 이 우주에 남겨진 이 사람들은 보이지 않는 기다란 하얀 실로 전부 연결되어 있는 모습을요. 대화를 하지 않아도 그 실들은 서로 정보를 주고받아요. 정보를 주고받을 땐 그 실이 빛나요. 그래서 가끔은 눈이 너무 부셔서 선글라스를 껴야 할 때도 있어요. 내향형 인간이라는 건 실은 그 실의 빛에 민감한 사람들이에요. 반대로 외향형 인간이라는 건 그 실의 빛에 둔감한 사람 혹은 그 빛을 즐기는 사람이고요. 그거 알아요? 빛은 직진성을 가지고 있지만 동시에 반사성을 가지고 있어서 난반사라는 과정을 거쳐 우리의 주변을 밝게 만들어준대요. 그런 것처럼 우리들 또한 보이지 않는 빛의 난반사를 받아들여버리면 느끼지 않아도 될 감정까지 모두 느껴버리고 마는 거 같아요. 날 안아줄래요? 정신병자라고 욕해도 뭐라 하지 않을게요. 그냥.. 그냥 전 원래 이런 인간인걸요. 절 용서해 주세요. 제가 늘 나쁜 거니까, 제가 늘 잘못된 거니까. 저를 탓해주세요. 당신이 그래서 행복하다면 그래도 좋아요. 하지만 어쩌면 제가 이런 말을 했기에 반항심으로 절 싫어하지 않을 거라는 사실 또한 알아요. 그렇다면 제가 당신을 싫어할게요. 당신을 미워하고 증오할래요. 사실 제가 저의 내면 당신에게 쓸모없었을지 모르는 제 소중한 것들 하나하나 마저 당신에게 건네줄 땐 그게 당연하다는 듯 받아놓고는 선뜻 저를 버리고 마는 당신이 미워요. 미워서 죽여버리고 싶을 때도 있어요. 그렇지만... 그렇지만 그러기엔 너무 무섭잖아요. 그래서 그냥 살아가고 있는 거예요. 오늘도, 내일도, 모레도 그냥.. 쭉 그냥.. 감정이 벅차오를 땐 저를 생각해 주세요. 당신의 갈라진 감정의 땅 사이에 저를 끼워 넣어주세요. 그러면 당신의 감정이 벅차오를 때마다 제가 조금이라도 묻어 나올 수 있다면, 그렇게라도 저를 계속 기억해 줄 수 있다면야. 사랑에 빠지는 건 쉽다고 생각했는데, 아무래도 지속적인 사랑을 당신에게 주는 건 생각보다 어려웠던 일 이었나봐요. 저는 이제 괜찮으니까 당신의 인생을 살아주세요. 사실 괜찮지 않더라도 괜찮다고 넌지시 전하고 말겠죠. 저도, 당신도. 가끔은 울지 말라고 말해주던 당신의 목소리가 그리워요. 그렇지만 그 말이 제 상황을 더 악화시켰다는 걸 알기에 이젠 그 문장을 혐오하기로 했어요. 저를 안아줄 사람은 이제 더 이상 필요 없는 것만 같아요. 그래도 늘 새로운 인연을 찾아 떠나고 싶은 마음인 걸요. 사랑해 주세요. 저도 사랑할게요.  사랑... 이 실은 이젠 싫어요."
+    },
+    {
+        "id": "p4",
+        "title": "04 미리별",
+        "year": "2024",
+        "category": "Sound / AV",
+        "thumbnail": "asset/WebIndependence/04미리별/미리별_썸네일, 2023, acornriver.png",
+        "images": [
+            "asset/WebIndependence/04미리별/미리별1.jpg",
+            "asset/WebIndependence/04미리별/미리별2.png",
+            "asset/WebIndependence/04미리별/미리별3.png"
+        ],
+        "description": "[2023] 미리별 - 강민혁(acornriver), 인스톨레이션\n\n\nhttps://www.youtube.com/watch?v=OnR8ZO98n8I\n\n\nⓒ 2025. acornriver All rights reserved.\n[콘텐츠 기획 배경 및 목적]\n\n- 무언가 이상했다. 나는 어릴 적 어디든지 단 몇초면 이동할 수 있었다. 나에겐 우주선이 있었다. 이불과 식탁으로 이루어진 나의 비밀기지는 나에게 그 어떤 우주비행기보다 빠른 우주선이었다. 하지만 점차 어른이 되어간 나는 우주선을 잃어버리고 자동차를 타고 이동하기 일수였다. 자동차는 나에게 너무 느렸다. 그리고, 우주도 갈 수 없었다. 그래서, 나는 우주선을 만들기로 하였다. 하지만 어릴때처럼 커다란 우주선은 아니고 약식으로 이루어진 우주선을 만들기로 타협했다. \n\n\n\n[콘텐츠 구현 계획]\n\n- 앞 컴퓨터에 설치된 카메라는 인공지능 카메라가 실행되고 있다. 이 인공지능 카메라는 담요에 새겨진 특정 문향을 인식하면 프로그램이 발동되도록 학습되어있다. 이후, 체험자가 담요를 머리에 덮고 카메라가 이를 인식하면 담요 밑에 설치된 기계장치가 음악과 화면에 맞추어 움직이며 체험자는 '담요를 덮어 우주여행을 체험'하게 된다.\n\n\n[음악](https://soundcloud.com/acornriver/miribyul-wav/s-vWtRAYjuMvy?si=a7273a66ea8947fd84017f7979d82f93&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)"
+    },
+    {
+        "id": "p5",
+        "title": "05 우쥬여행 앨범 발매",
+        "year": "2024",
+        "category": "Music / Album",
+        "thumbnail": "asset/WebIndependence/05우쥬여행 앨범 발매/우쥬여행_썸네일 2024, acornriver.png",
+        "images": [],
+        "description": "2024, acornriver 미니앨범\n\nhttps://www.youtube.com/watch?v=FZyyGRt9Suk\n\n모두 날개가 있어 날 수 있는 지구에서 유일하게 날개가 없던 미녁은 마침내 우쥬로 날아가 유영하며 날기 시작한다.\n\nⓒ 2025. acornriver All rights reserved."
+    },
+    {
+        "id": "p6",
+        "title": "06 전음 배경영상",
+        "year": "2024",
+        "category": "Video / VFX",
+        "thumbnail": "asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상_썸네일 2023, 서울예술대학교 전자음악과 24학번 X acornriver.png",
+        "images": [
+            "asset/WebIndependence/06서울예대 전음 배경영상 제작/A ball1.png",
+            "asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상1.png",
+            "asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상2.png",
+            "asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상3.png",
+            "asset/WebIndependence/06서울예대 전음 배경영상 제작/전음배경영상4.png"
+        ],
+        "description": "서울예술대학교 전자음악과 24학번 X acornriver\n\nhttps://www.youtube.com/watch?v=RQ_8zU4LGBQ\n\n\n공식 영상의 15:48 ~ 19:02 [Post Apocalypse 1 - Until Then] 팀 뒷배경 영상을 제작하였습니다.\n\nps. 아카이브에 음원 사용을 흔쾌히 허락해주셔서 감사합니다!\n\n\n\n\n\nⓒ 2025. acornriver All rights reserved.\n\n00:00[정화 작용]\n00:30[다시 나타난 희망의 새싹]\n00:50[새싹의 성장과 변화]\n02:30[다시 태어난 세상]\n\n\n\nUsed Tool: aftereffect, unreal engine5, final cut pro"
+    },
+    {
+        "id": "p7",
+        "title": "07 모서리인간",
+        "year": "2024",
+        "category": "Short Film",
+        "thumbnail": "asset/WebIndependence/07모서리인간/모서리인간_썸네일 2024, acornriver.png",
+        "images": [
+            "asset/WebIndependence/07모서리인간/모서리인간1.png",
+            "asset/WebIndependence/07모서리인간/모서리인간2.png"
+        ],
+        "description": "acornriver\n2024\n\nhttps://www.youtube.com/watch?v=lrTWpLKEgFU\n\n\n낑기고 낑겨 겨우 남겨진 내 마지막 공간 모서리에서조차 나는 버티지 못하고 그만 튕겨져 나왔다. 아니, 어쩌면 내 자유를 찾아간 것일지도"
+    },
+    {
+        "id": "p8",
+        "title": "08 철의 언어",
+        "year": "2024",
+        "category": "Installation",
+        "thumbnail": "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/디지털 기반의 인스톨레이션 철의 언어 _썸네일 2024,  acornriver.png",
+        "images": [
+            "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/철의언어1.png",
+            "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/철의언어2.png",
+            "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/철의언어3.png",
+            "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/철의언어4.png",
+            "asset/WebIndependence/08디지털기반의인스톨레이션-철의언어/철의언어5.png"
+        ],
+        "description": "디지털 기반의 인스톨레이션 - 철의 언어\nacornriver, \n우성현, \n손홍준,\n김태훈, \n김현지\n\n\nhttps://www.youtube.com/watch?v=l68EgcpjwRI\n\n\nⓒ 2025. acornriver All rights reserved.\n“스피커 안에는 울림판이 있었다”라는 이야기에서 출발하여 철판의 소리를 울림판으로 활용해 무한한 울림을 만들어보고자 한다. 철의 공명주파수에 해당하는 부분을 증폭해 재생성하여 울리게 되는 철판의 소리를 녹음하여 다시 철판으로 재생한다. 그 소리와 동시에 그 소리를 녹음한 건반을함께 실시간으로 연주하며 소리를 조정해간다. 관람자는 철이 내는 소리를 직접 만지고 소리내며 체험할 수 있으며 5명의 작가도 실시간으로 소리를 조정해가며 철이 내는 소리를 현대의 시간과 공간과 함께 표현해본다."
+    },
+    {
+        "id": "p9",
+        "title": "09 펑 니 풍선 터지는 소리",
+        "year": "2024",
+        "category": "Sound / Performance",
+        "thumbnail": "asset/WebIndependence/09펑니풍선터지는소리/펑니풍선터지는소리_썸네일 2024, acornriver.png",
+        "images": [
+            "asset/WebIndependence/09펑니풍선터지는소리/펑니풍선1.png",
+            "asset/WebIndependence/09펑니풍선터지는소리/펑니풍선2.png"
+        ],
+        "description": "acornriver,\n2024\n\n\nhttps://www.youtube.com/watch?v=i8iaFYOg3AM\n\n\nⓒ 2025. acornriver All rights reserved.\n\n\n펑! (니 풍선 터지는 소리)\n\n사람이 다가오면 풍선이 숨을 들이마신다.\n조금 더, 조금 더, 끝까지.\n그리고 터진다.\n\n가까워지는 마음, 차오르는 긴장,\n그리고 피할 수 없는 순간에 대한 기록.\n\n그리고 그 뒤에서 열일하는 장치(초음파 센서, 듀얼 모터)에 대한 고찰\n—\n\nPyeong (The Sound of Your Balloon Bursting)\nWhen someone approaches, the balloon inhales.\nA little more, a little more, until the very end.\nAnd then it bursts.\n\nA record of closeness, rising tension,\nand the moment you cannot avoid."
+    },
+    {
+        "id": "p10",
+        "title": "10 연산적시",
+        "year": "2025",
+        "category": "AV / Experimental",
+        "thumbnail": "asset/WebIndependence/10연산적시/연산적 시_썸네일 2025, acornriver.png",
+        "images": [
+            "asset/WebIndependence/10연산적시/연산적시1.png",
+            "asset/WebIndependence/10연산적시/연산적시2.png",
+            "asset/WebIndependence/10연산적시/연산적시3.png",
+            "asset/WebIndependence/10연산적시/연산적시4.png",
+            "asset/WebIndependence/10연산적시/연산적시5.png"
+        ],
+        "description": "연산적 시 - 김호남, 엄기순\n\n프로그램 - acornriver\n\nhttps://www.youtube.com/watch?v=6_KeSJpxjUg\n\nⓒ 2025. acornriver All rights reserved.\n\n기획 - 김호남 작가님\n제작 - 엄기순 작가님\n프로그래밍 - 강민혁 acornriver\n장소 - 백남준 아트센터\n\n장치는 사람이 없어도 입력을 계속합니다. 그곳엔 유령이 존재하는 걸까요? 우리는 그 유령을 통해 무엇을 배우고 답습할 수 있을까요? 함께 고민해 보아요."
+    },
+    {
+        "id": "p11",
+        "title": "11 오브메모리오브",
+        "year": "2025",
+        "category": "Exhibition",
+        "thumbnail": "asset/WebIndependence/11오브메모리오브/오브메모리오브_썸네일 2025, acornriver.png",
+        "images": [
+            "asset/WebIndependence/11오브메모리오브/오메오1.png",
+            "asset/WebIndependence/11오브메모리오브/오메오2.png",
+            "asset/WebIndependence/11오브메모리오브/오메오3.png",
+            "asset/WebIndependence/11오브메모리오브/오메오4.png"
+        ],
+        "description": "오브 메모리 오브, acornriver, 김승민, 우성현 , 2025\n\n\nhttps://www.youtube.com/watch?v=iBMpqVptw4k\n\n\nⓒ 2025. acornriver All rights reserved.\n\n\n카메라가 포착한 무용수의 손 그림자가 실시간으로 스크린에 투사되며, 관객은 제3자의 시점에서 무용수를 마주한다. 카메라의 화면 중심에서 멀어질수록 길어지고 왜곡되는 그림자의 움직임에 따라 피드백 딜레이 기반의 노이즈 사운드가 생성되고 증폭된다. 그림자의 위치와 각도 변화는 Python과 OSC를 통해 MaxMSP로 전송되어 스테레오 공간에서 움직이는 사운드로 변환되며, 이는 메아리처럼 반복되며 공간에 잔향으로 남는다. 무용수의 미세한 손짓과 노이즈의 극적인 변조 사이에서 관객은 존재의 흔적이 어떻게 기억의 잔상으로 변화하는지를 경험한다. 빛과 그림자, 그리고 그 사이에서 피어나는 되먹임 속에서 움직임이 남기는 보이지 않는 흔적들을 탐색하는 인터랙티브 사운드 퍼포먼스."
+    },
+    {
+        "id": "p12",
+        "title": "12 스며듦",
+        "year": "2025",
+        "category": "Music / Release",
+        "thumbnail": "asset/WebIndependence/12스며듦 음악 발매/스며듦_썸네일 2025, acornriver.png",
+        "images": [
+            "asset/WebIndependence/12스며듦 음악 발매/스며듦1.jpeg"
+        ],
+        "description": "스며듦, acornriver, 2025\n\n\n\nhttps://www.youtube.com/watch?v=m3Cwx3wX0oU\n\n\nⓒ 2025. acornriver All rights reserved.\n첫 번째 EP [우쥬여행]은 홀로 다른 세계에 있는 듯한 외로움에서 벗어나, 개개인의 다름을 인정하는 새로운 세상, '예술'이라는 공간을 찾아가는 여정을 그렸습니다.\n\n이번 싱글 [스며듦]에서는 그 발견 이후 더욱 깊고 섬세해진 감정과 생각들을 펼쳐냅니다. 이 음악을 듣는 분들이 혹시라도 저와 같은 감정을 느낀다면, 그 마음은 혼자가 아닌, 따뜻하게 함께 나누는 감정이라는 위로와 공감을 전달하고 싶습니다.\n\n\nCREDIT\n\nMixed & Mastered by MixingArt (ingspr)\nalbum art by 다온\nProduced, Composed by 미녁\n\n\n\nPUBLISHED BY BISCUIT SOUND"
+    },
+    {
+        "id": "p13",
+        "title": "13 봄에피는초록이라는언어",
+        "year": "2025",
+        "category": "Book / Publication",
+        "thumbnail": "asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄에피는초록이라는언어_썸네일 2025, acornriver.png",
+        "images": [
+            "asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄피언1.png",
+            "asset/WebIndependence/13봄에피는초록이라는언어 책 발권/봄피언2.png"
+        ],
+        "description": "\n봄에 피는 초록이라는 언어, acornriver, 2025\n\nⓒ 2025. acornriver All rights reserved.\n당신은 당신의 언어 속에 살고 있나요?\n\n\n제가 혹독한 계절을 견디고 마침내 틔워내는 여린 싹처럼, 우리에겐 저마다의 속도로 피어나는 '초록의 언어'가 있습니다.\n\n이 책은 잠시 웅크리고 있던 당신의 마음에 건네는 가장 따뜻하고 싱그러운 위로의 문장들입니다.\n\n잊고 있던 일상의 다정한 순간들을 만나볼 수 있는 책 입니다.\n\n\n[구매링크](https://bookk.co.kr/bookStore/68b57ab8cae1f08cbb50a108)"
+    },
+    {
+        "id": "p14",
+        "title": "14 빛의 언어",
+        "year": "2025",
+        "category": "Research / test",
+        "thumbnail": "asset/WebIndependence/14 빛의 언어/빛의언어_썸네일 2025, acornriver.png",
+        "images": [
+            "asset/WebIndependence/14 빛의 언어/빛의언어1.png",
+            "asset/WebIndependence/14 빛의 언어/빛의언어2.png"
+        ],
+        "description": "빛의 언어, acornriver, 2025\n\n\n\n\nhttps://www.youtube.com/watch?v=oltIvDI5zJE\n\n\n\nⓒ 2025. acornriver All rights reserved.\n\n인공지능으로 만들어진 꺼져가는 조명은 모스부호로 본인의 마지막 말을 건네곤 세상을 떠나갑니다. 아니 사실 존재하지 않는 조명이었으니 존재하는 이유를 불문할 수 있을까요? 즐겁지 않은 인생이라면 즐거운 이유를 찾아야 하는 것처럼 조명은 본인이 깜빡이는 이유를 찾아야만 할지도 모르겠습니다. 우리가 할 수 있는 건 우연히 그리고 유한히 깜빡이는 조명의 언어를 모스부호로 재해석 하는 것 정도겠네요 쩝.\n\n\n나중엔 이걸 실사로 해보고 싶어요."
+    },
+    {
+        "id": "p15",
+        "title": "15 다민프로젝트 01",
+        "year": "2025",
+        "category": "Project",
+        "thumbnail": "asset/WebIndependence/15다민프로젝트 01/다민프로젝트01_썸네일 2025, acornriver, daon.png",
+        "images": [
+            "asset/WebIndependence/15다민프로젝트 01/다민1.png",
+            "asset/WebIndependence/15다민프로젝트 01/다민2.png",
+            "asset/WebIndependence/15다민프로젝트 01/다민3.png",
+            "asset/WebIndependence/15다민프로젝트 01/다민4.png"
+        ],
+        "description": "다민프로젝트-01\nacornriver,\ndaon,\n2025\n\n\nⓒ 2025. acornriver All rights reserved.\n\n'다민프로젝트-01'은 미술관에 있을 법한 캡션을 아무곳에나 붙여보는 작업이었습니다. 사람들이 우리의 캡션을 보고 또 너머의 그 사람들만의 투명한 캡션을 봐주기를 바랐습니다.. 만 저는 오히려 이 작품을 만들면서 이 거리와 이 도시, 그리고 이 도시만의 언어를 배울 수 있었던 것 같습니다. 여러분은 요즘 어떤 음악을 듣고 있나요? 그 음악은 혹시 캐롤인가요? 그렇다면 그 캐롤은 여러분의 언어가 될 수 있을까요? 여러분의 삶에 침투하진 못해도 같이 사색은 할 수 있는 예술가가 되겠습니다. -아콘리버\n______\n\n예전부터 일상 속 평범한 요소를 소중히 하고 저만의 해석으로 재탄생시키는 일을 추구하고 좋아하였는데, 이번에 익숙한 거리를 재해석할 기회가 생겨서 좋았습니다. 세상 이곳저곳 작은 요소까지 관찰하는 저 조차도 익숙함에 미처 못 본 새로운 설치물들을 발견하곤 했는데, 여러분은 평소에 자주 다니던 길가에서 본인만의 다민프로젝트를 진행해보시는 거 어떨까요?\n+ 시간이 꽤 지나서 스티커가 사라진 곳이 많아졌습니다. 그중에서 강민혁 전용 의자가 제 최애였는데 사라져서 아쉽습니다🌭 -다온\n\narchive url :: https://urbanproject.daonmin.net/\n\n[바로가기](https://urbanproject.daonmin.net/)"
+    }
+];
+
+export const cvData = `Digital Artist
+Profile_
+minhyuk@acornriver.work
+
+instagram: acornriver_
+
+[youtube](https://youtube.com/@acornriver)
+-
+[blog](https://www.acornriver.net)
+
+
+
+Curriculum Vitae 
+
+안녕하세요. 미디어 아티스트이자 디렉터로 활동하는 강민혁 (acornriver)입니다. 
+기술과 예술의 경계를 탐구하며, 사운드, 영상, 인터랙티브 설치 등 다양한 매체를 통해 작업을 아카이빙합니다. 
+
+Education 
+
+서울예술대학교 (Seoul Institute of the Arts) 디지털아트 전공 재학 중 
+
+
+Employment 
+
+not yet : p 
+
+
+Skills 
+
+Audio-Visual Art Sound Performance Unreal Engine Physical Computing Exhibition Curation Sound Design & Composition Documentary Filmmaking 
+
+
+Referrals 
+
+not yet :-) 
+
+
+Exhibitions 
+
+
+WeSA 사운드 퍼포먼스[WeSA] 
+2025 '연산적 시' (백남준아트센터)전시 참여, [연산적 시]
+2025 서울예술대학교 피지컬 컴퓨팅 전시[서울예술대학교] 
+2024 서울예술대학교 '철의 언어' 전시기획 총괄 
+2024 서울예술대학교 전자음악과 오디오비주얼참여 
+2024 'A ball' (Unreal Engine Art)한국영상대학교 1층 
+2023 CVBUSAN2023 '받아라 우주의 답변!'전시 참여 
+2023 Awards 제16회 부산국제어린이청소년영화제리본 더 비키(Re-born the BIKY) 부문 수상 (작품: 파인딩 마이 패스 다큐멘터리) 2021 
+
+
+Press 
+
+2025 '스며듦'디지털 싱글 
+2024’우쥬여행'디지털 싱글
+2023 '사람을 사랑하면서도 나는 또 미워해'디지털 싱글 
+2023 '잔향'디지털 싱글`;

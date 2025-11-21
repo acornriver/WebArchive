@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>acornriver — digital artist</title>
     <link rel="icon" type="image/png" href="asset/fabicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Background Reveal Container -->
+    <!-- Background Reveal Container (Double Buffer for Smooth Transition) -->
+    <div id="bg-layer-1" class="reveal-bg"></div>
+    <div id="bg-layer-2" class="reveal-bg"></div>
+    <div class="noise-overlay"></div>
+
     <div class="container">
         <header>
-            <div class="header-left">
-                <h1>acornriver</h1>
-                <p class="tagline">digital artist</p>
+            <div class="header-content">
+                <h1><a href="/">acornriver</a></h1>
+                <nav class="header-nav">
+                    <button id="info-btn" class="nav-link" aria-label="View CV">Info</button>
+                </nav>
             </div>
-            <nav class="header-nav">
-                <a href="#" id="info-btn" class="nav-link">CV</a>
-            </nav>
         </header>
 
         <main>
-            <ul id="project-list" class="projects-grid">
+            <ul id="project-list" class="projects-list">
                 <!-- Projects will be injected here by JavaScript -->
             </ul>
         </main>
@@ -29,6 +41,7 @@
             <p>&copy; 2025 acornriver. All rights reserved.</p>
         </footer>
 
+        <!-- Project Detail Modal -->
         <div id="project-detail-modal" class="modal" aria-hidden="true" role="dialog">
             <div class="modal-overlay"></div>
             <div class="modal-content">
@@ -37,6 +50,7 @@
             </div>
         </div>
 
+        <!-- Info/CV Modal -->
         <div id="info-modal" class="modal" aria-hidden="true" role="dialog">
             <div class="modal-overlay"></div>
             <div class="modal-content modal-content--cv">
@@ -46,6 +60,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
