@@ -56,7 +56,7 @@ function buildData() {
                     if (IMAGE_EXTS.includes(ext)) {
                         // Construct relative path for web
                         // Use forward slashes for web paths
-                        const webPath = path.join(ASSET_DIR, item, file).split(path.sep).join('/');
+                        const webPath = normalize(path.join(ASSET_DIR, item, file).split(path.sep).join('/'));
 
                         // Check if it's a thumbnail
                         // Logic: file name contains 'thumbnail' or '썸네일'
