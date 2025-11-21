@@ -11,7 +11,7 @@ export const projects = [
             "asset/WebIndependence/00파인딩 마이 패스/파마패3.png",
             "asset/WebIndependence/00파인딩 마이 패스/파마패4.png"
         ],
-        "description": "2023\nacornriver\n\n\nhttps://www.youtube.com/watch?v=Pz0igmhbjWw\n\n\nⓒ 2025. acornriver All rights reserved.\n\n인생을 결정할 시기인 고3이 된 민혁은 카메라를 들고 자신의 길을 찾는 영상을 찍기 시작한다. 첫 번째로는 자신의 길이 어디에서부터 생겼는지. 두 번째로는 자신의 길을 어떻게 걸어야 하는지. 세 번째로는 어떻게 아름다운 길을 걸을 수 있는지, 네 번째로는 길을 걷는 방법에 대해 탐구하는 모습을 민혁은 영화를 찍으며 깨닫게 된다.\n\n-제작지원\n\n강기형, \n이은경\n\n출연\n\n강민혁, \n박주헌, \n강기형, \n이은경, \n신강철, \n이루다\n\n음악 제공\n\n이루다 \n\n– \n20210218,\n있지, \n물어봤어-,\n산호, \n숨,\n항상 같은 존재로 남도록,\nFinding My Way\n\nost\n\n\n촬영 도움\n\n강기형, \n이루다, \n신강철\n\n\n기획, 연출, 촬영, 편집\n\n강민혁\n\n\n번역\n\n이루다\n\n\n감독\n\n강민혁\n\n\n[수상내역]\n\n부산국제어린이청소년영화제 BIKY 리본더비키 상영작"
+        "description": "2023\nacornriver\n\n\nhttps://www.youtube.com/watch?v=Pz0igmhbjWw\n\n\nⓒ 2025. acornriver All rights reserved.\n\n인생을 결정할 시기인 고3이 된 민혁은 카메라를 들고 자신의 길을 찾는 영상을 찍기 시작한다. 첫 번째로는 자신의 길이 어디에서부터 생겼는지. 두 번째로는 자신의 길을 어떻게 걸어야 하는지. 세 번째로는 어떻게 아름다운 길을 걸을 수 있는지, 네 번째로는 길을 걷는 방법에 대해 탐구하는 모습을 민혁은 영화를 찍으며 깨닫게 된다.\n\n-제작지원\n\n강기형, \n이은경\n\n출연\n\n강민혁, \n박주헌, \n강기형, \n이은경, \n신강철, \n이루다\n\n음악 제공\n\n이루다 \n\n– \n20210218,\n있지, \n물어봤어-,\n산호, \n숨,\n항상 같은 존재로 남도록,\nFinding My Way\n\n[Osttt]](https://www.google.com/){:target=\"_blank\"}\n\n\n촬영 도움\n\n강기형, \n이루다, \n신강철\n\n\n기획, 연출, 촬영, 편집\n\n강민혁\n\n\n번역\n\n이루다\n\n\n감독\n\n강민혁\n\n\n수상내역\n\n부산국제어린이청소년영화제 BIKY 리본더비키 상영작"
     },
     {
         "id": "p1",

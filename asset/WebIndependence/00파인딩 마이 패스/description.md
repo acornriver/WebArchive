@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=Pz0igmhbjWw
 항상 같은 존재로 남도록,
 Finding My Way
 
-ost
+[Osttt]](https://www.google.com/){:target="_blank"}
 
 
 촬영 도움
@@ -61,6 +61,6 @@ ost
 강민혁
 
 
-[수상내역]
+수상내역
 
 부산국제어린이청소년영화제 BIKY 리본더비키 상영작
