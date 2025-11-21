@@ -36,9 +36,6 @@ https://www.youtube.com/watch?v=Pz0igmhbjWw
 항상 같은 존재로 남도록,
 Finding My Way
 
-[Osttt]](https://www.google.com/){:target="_blank"}
-
-
 촬영 도움
 
 강기형, 
