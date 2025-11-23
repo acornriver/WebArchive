@@ -39,15 +39,17 @@ export const getSelectedWorks = () => {
 
 // 4. Archive: Categorized List
 // Logic: Filter remaining projects into specific tabs
+// 4. Archive: Categorized List
+// Logic: Filter projects based on their tags
 export const getArchiveCategories = () => {
     const allProjects = projects;
 
     return {
-        "Interactive/Tech": allProjects.filter(p => ['p8', 'p9', 'p10', 'p11', 'p14'].includes(p.id)),
-        "Film/Video": allProjects.filter(p => ['p0', 'p1', 'p6', 'p7'].includes(p.id)),
-        "Sound/Music": allProjects.filter(p => ['p4', 'p5', 'p12'].includes(p.id)),
-        "Publication/Project": allProjects.filter(p => ['p13', 'p15'].includes(p.id)),
-        "All": allProjects // Default view
+        "Interactive/Tech": allProjects.filter(p => p.tags?.includes("Interactive/Tech")),
+        "Film/Video": allProjects.filter(p => p.tags?.includes("Film/Video")),
+        "Sound/Music": allProjects.filter(p => p.tags?.includes("Sound/Music")),
+        "Publication/Project": allProjects.filter(p => p.tags?.includes("Publication/Project")),
+        "All": allProjects
     };
 };
 

@@ -5,7 +5,7 @@ import shutil
 import re
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QListWidget, QLabel, QLineEdit, QTextEdit, QPushButton, 
-                             QScrollArea, QFileDialog, QMessageBox, QFormLayout, QFrame)
+                             QScrollArea, QFileDialog, QMessageBox, QFormLayout, QFrame, QCheckBox)
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QColor, QPalette
 
@@ -13,7 +13,23 @@ from PyQt6.QtGui import QFont, QColor, QPalette
 DATA_FILE = "src/data/projects.json"
 ASSET_BASE_DIR = "public/asset/WebIndependence"
 WINDOW_TITLE = "Portfolio Content Manager"
-WINDOW_SIZE = (1200, 800)
+WINDOW_SIZE = (1200, 900)
+
+# Define the standard tags that match the website categories
+STANDARD_TAGS = [
+    "Interactive/Tech",
+    "Film/Video",
+    "Sound/Music",
+    "Publication/Project"
+]
+
+# Legacy mapping for migration (based on the previous hardcoded IDs)
+LEGACY_MAPPING = {
+    "Interactive/Tech": ['p8', 'p9', 'p10', 'p11', 'p14'],
+    "Film/Video": ['p0', 'p1', 'p6', 'p7'],
+    "Sound/Music": ['p4', 'p5', 'p12'],
+    "Publication/Project": ['p13', 'p15']
+}
 
 class PortfolioManager(QMainWindow):
     def __init__(self):
@@ -79,9 +95,9 @@ class PortfolioManager(QMainWindow):
         form_layout = QFormLayout()
         form_layout.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
         
-        labels = ["ID", "Title", "Year", "Category", "Youtube URL"]
+        labels = ["ID", "Title", "Year", "Category (Display Text)", "Youtube URL"]
         for label in labels:
-            key = label.lower().replace(" ", "")
+            key = label.lower().replace(" ", "").replace("(displaytext)", "")
             if label == "Youtube URL": key = "youtubeUrl"
             
             line_edit = QLineEdit()
@@ -90,7 +106,21 @@ class PortfolioManager(QMainWindow):
 
         self.editor_layout.addLayout(form_layout)
 
+        # Tag Selection (Checkboxes)
+        self.editor_layout.addSpacing(10)
+        self.editor_layout.addWidget(QLabel("Website Categories (Tags):"))
+        
+        self.tag_checkboxes = {}
+        tags_layout = QVBoxLayout()
+        for tag in STANDARD_TAGS:
+            cb = QCheckBox(tag)
+            self.tag_checkboxes[tag] = cb
+            tags_layout.addWidget(cb)
+        
+        self.editor_layout.addLayout(tags_layout)
+
         # Description
+        self.editor_layout.addSpacing(10)
         self.editor_layout.addWidget(QLabel("Description:"))
         self.desc_edit = QTextEdit()
         self.desc_edit.setMinimumHeight(150)
@@ -145,7 +175,7 @@ class PortfolioManager(QMainWindow):
             with open(DATA_FILE, 'r', encoding='utf-8') as f:
                 self.projects = json.load(f)
             
-            self.migrate_youtube_urls()
+            self.migrate_data()
             self.refresh_project_list()
             
             if self.projects:
@@ -154,10 +184,12 @@ class PortfolioManager(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load data: {str(e)}")
 
-    def migrate_youtube_urls(self):
-        url_pattern = re.compile(r'(https?://(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)[^\s]+)')
+    def migrate_data(self):
         modified = False
+        url_pattern = re.compile(r'(https?://(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)[^\s]+)')
+        
         for project in self.projects:
+            # 1. Migrate Youtube URLs
             if 'youtubeUrl' not in project or not project['youtubeUrl']:
                 description = project.get('description', '')
                 match = url_pattern.search(description)
@@ -168,9 +200,18 @@ class PortfolioManager(QMainWindow):
                     new_desc = re.sub(r'\n{3,}', '\n\n', new_desc)
                     project['description'] = new_desc
                     modified = True
+            
+            # 2. Migrate Tags (One-time, based on ID)
+            if 'tags' not in project:
+                project['tags'] = []
+                pid = project.get('id')
+                for tag, ids in LEGACY_MAPPING.items():
+                    if pid in ids:
+                        project['tags'].append(tag)
+                modified = True
         
         if modified:
-            print("Migrated YouTube URLs from descriptions.")
+            print("Migrated Data (YouTube URLs and Tags).")
 
     def refresh_project_list(self):
         self.project_list.clear()
@@ -181,7 +222,6 @@ class PortfolioManager(QMainWindow):
         if index < 0 or index >= len(self.projects):
             return
             
-        # Save previous if needed (optional, but good practice)
         if self.current_project_index is not None and self.current_project_index != index:
             self.save_current_project_state_to_memory()
 
@@ -194,6 +234,11 @@ class PortfolioManager(QMainWindow):
         self.fields['category'].setText(project.get('category', ''))
         self.fields['youtubeUrl'].setText(project.get('youtubeUrl', ''))
         
+        # Tags
+        current_tags = project.get('tags', [])
+        for tag, cb in self.tag_checkboxes.items():
+            cb.setChecked(tag in current_tags)
+
         self.desc_edit.setPlainText(project.get('description', ''))
         
         images = project.get('images', [])
@@ -211,6 +256,14 @@ class PortfolioManager(QMainWindow):
         project['year'] = self.fields['year'].text()
         project['category'] = self.fields['category'].text()
         project['youtubeUrl'] = self.fields['youtubeUrl'].text()
+        
+        # Save Tags
+        selected_tags = []
+        for tag, cb in self.tag_checkboxes.items():
+            if cb.isChecked():
+                selected_tags.append(tag)
+        project['tags'] = selected_tags
+
         project['description'] = self.desc_edit.toPlainText().strip()
         project['thumbnail'] = self.thumb_edit.text()
         
@@ -227,7 +280,8 @@ class PortfolioManager(QMainWindow):
             "thumbnail": "",
             "images": [],
             "description": "",
-            "youtubeUrl": ""
+            "youtubeUrl": "",
+            "tags": []
         }
         self.projects.append(new_project)
         self.refresh_project_list()
