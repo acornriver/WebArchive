@@ -59,7 +59,7 @@ export default function SelectedWorks() {
                                         <div className="absolute bottom-6 left-6 z-20 flex gap-3">
                                             {index === 0 ? (
                                                 <span className="bg-blue-600/90 backdrop-blur-md text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
-                                                    <Layers size={16} /> Physical Computing
+                                                    <Layers size={16} /> Installation
                                                 </span>
                                             ) : (
                                                 <span className="bg-purple-600/90 backdrop-blur-md text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">

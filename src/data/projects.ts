@@ -28,7 +28,7 @@ instagram: [acornriver_](https://instagram.com/acornriver_)
 - Audio-Visual Art
 - Sound Performance
 - Unreal Engine
-- Physical Computing
+- Installation
 - Exhibition Curation
 - Sound Design & Composition
 - Documentary Filmmaking

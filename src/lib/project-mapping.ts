@@ -28,7 +28,7 @@ export const getSelectedWorks = () => {
     return [
         {
             project: projects.find(p => p.id === 'p8'),
-            focus: "General Director & Physical Computing"
+            focus: "General Director & Installation"
         },
         {
             project: projects.find(p => p.id === 'p2'),
