@@ -11,6 +11,12 @@ export default function AdminPage() {
     const [status, setStatus] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [expandedId, setExpandedId] = useState<string | null>(null);
+    const [isDevMode, setIsDevMode] = useState(false);
+
+    useEffect(() => {
+        // Check if we're in development mode
+        setIsDevMode(process.env.NODE_ENV === 'development');
+    }, []);
 
     const handleLogin = async () => {
         if (password) {
@@ -60,7 +66,7 @@ export default function AdminPage() {
     };
 
     const addProject = () => {
-        const newId = `p${projects.length}`; // Simple ID generation
+        const newId = `p${projects.length}`;
         const newProject: Project = {
             id: newId,
             title: 'New Project',
@@ -84,6 +90,21 @@ export default function AdminPage() {
         p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.id.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    if (!isDevMode) {
+        return (
+            <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+                <div className="bg-zinc-900 p-8 rounded-xl border border-zinc-800 w-full max-w-md shadow-2xl">
+                    <h1 className="text-2xl font-bold mb-4 text-center">Admin Page Unavailable</h1>
+                    <p className="text-gray-400 text-center">
+                        This page is only available in development mode.
+                        <br /><br />
+                        Run <code className="bg-black px-2 py-1 rounded">npm run dev</code> locally to access the admin panel.
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     if (!isAuthenticated) {
         return (
@@ -114,7 +135,7 @@ export default function AdminPage() {
             <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <div className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl py-4 mb-8 border-b border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <h1 className="text-3xl font-bold">Project Manager</h1>
+                    <h1 className="text-3xl font-bold">Project Manager (Dev Mode)</h1>
 
                     <div className="flex items-center gap-4 w-full md:w-auto">
                         <div className="relative flex-1 md:w-64">

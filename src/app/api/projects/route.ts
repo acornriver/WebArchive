@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
+// This API route only works in development mode
+if (process.env.NODE_ENV !== 'development') {
+    throw new Error('This API route is only available in development mode');
+}
+
 const DATA_FILE_PATH = path.join(process.cwd(), 'src/data/projects.json');
 const PASSWORD = 'Kdoogy11!';
 
@@ -29,3 +34,5 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Failed to save data' }, { status: 500 });
     }
 }
+
+export const dynamic = 'force-dynamic';
