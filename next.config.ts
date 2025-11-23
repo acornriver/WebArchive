@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   basePath: isProd ? '/WebArchive' : '',
   assetPrefix: isProd ? '/WebArchive/' : '',
+  trailingSlash: true,
 };
 
 export default nextConfig;
