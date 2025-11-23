@@ -7,8 +7,6 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: isProd ? '/WebArchive' : '',
-  assetPrefix: isProd ? '/WebArchive' : '',
   trailingSlash: true,
 };
 
