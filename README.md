@@ -1,63 +1,36 @@
-# acornriver Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A minimal, elegant artist portfolio website showcasing digital art and sound projects.
+## Getting Started
 
-## Overview
+First, run the development server:
 
-This is a beautiful, responsive portfolio site for **acornriver**, a digital artist. The site features:
-
-- ✨ Minimal, elegant design
-- 📱 Fully responsive layout (mobile, tablet, desktop)
-- 🎥 Integrated YouTube video embeds
-- 🖼️ Project gallery with modal details
-- 📄 CV section
-- ♿ Accessible design with focus management and keyboard navigation
-
-## Features
-
-- **Dynamic Project Loading**: Markdown files are loaded dynamically from the `asset/WebIndependence` directory
-- **YouTube Integration**: URLs in project descriptions are automatically converted to embedded videos with proper aspect ratio
-- **Modal Navigation**: Smooth modal interactions with keyboard support (Esc to close, Tab to navigate)
-- **CV Button**: Top-right navigation button to view the artist's Curriculum Vitae
-- **Lazy Loading**: Images load on demand for better performance
-
-## Setup & Local Testing
-
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Optional: A simple HTTP server
-
-### Running Locally
-
-**Using Python 3:**
 ```bash
-python -m http.server 8000
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-**Using Node.js:**
-```bash
-npx http-server
-```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Then visit `http://localhost:8000` in your browser.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Deployment
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-This is a static website with no server-side dependencies. Deploy to:
+## Learn More
 
-- **GitHub Pages**: Enable in repository settings
-- **Netlify**: Connect your repository
-- **Vercel**: Zero-configuration deployment
-- **Traditional Hosting**: Upload via FTP/SFTP
-- **AWS S3 + CloudFront**: Static site hosting
+To learn more about Next.js, take a look at the following resources:
 
-## Browser Support
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## License
+## Deploy on Vercel
 
-See the LICENSE file for details.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
