@@ -6,4 +6,5 @@ export interface Project {
     thumbnail: string;
     images: string[];
     description: string;
+    youtubeUrl?: string;
 }
