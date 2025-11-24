@@ -5,12 +5,13 @@ import shutil
 import re
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QListWidget, QLabel, QLineEdit, QTextEdit, QPushButton, 
-                             QScrollArea, QFileDialog, QMessageBox, QFormLayout, QFrame, QCheckBox)
+                             QScrollArea, QFileDialog, QMessageBox, QFormLayout, QFrame, QCheckBox, QStackedWidget)
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QColor, QPalette
 
 # Configuration
 DATA_FILE = "src/data/projects.json"
+CV_FILE = "src/data/cv.json"
 ASSET_BASE_DIR = "public/asset/WebIndependence"
 WINDOW_TITLE = "Portfolio Content Manager"
 WINDOW_SIZE = (1200, 900)
@@ -40,6 +41,7 @@ class PortfolioManager(QMainWindow):
         
         # Data
         self.projects = []
+        self.cv_content = ""
         self.current_project_index = None
 
         # Setup UI
@@ -48,6 +50,7 @@ class PortfolioManager(QMainWindow):
         
         # Load Data
         self.load_data()
+        self.load_cv_data()
 
     def setup_ui(self):
         # Main Layout
@@ -74,6 +77,11 @@ class PortfolioManager(QMainWindow):
         self.save_btn.setStyleSheet("background-color: #2E8B57; color: white; font-weight: bold; padding: 10px;")
         self.save_btn.clicked.connect(self.save_data)
         sidebar_layout.addWidget(self.save_btn)
+
+        self.cv_btn = QPushButton("Edit CV")
+        self.cv_btn.setStyleSheet("background-color: #4682B4; color: white; font-weight: bold; padding: 10px; margin-top: 10px;")
+        self.cv_btn.clicked.connect(self.show_cv_editor)
+        sidebar_layout.addWidget(self.cv_btn)
 
         # Sidebar Container
         sidebar_widget = QWidget()
@@ -147,7 +155,30 @@ class PortfolioManager(QMainWindow):
         self.editor_layout.addWidget(self.thumb_edit)
 
         scroll_area.setWidget(self.editor_widget)
-        main_layout.addWidget(scroll_area)
+        
+        # CV Editor Area
+        self.cv_editor_widget = QWidget()
+        cv_layout = QVBoxLayout(self.cv_editor_widget)
+        
+        cv_label = QLabel("CV Editor (Markdown Supported)")
+        cv_label.setFont(QFont("Arial", 14, QFont.Weight.Bold))
+        cv_layout.addWidget(cv_label)
+        
+        self.cv_edit = QTextEdit()
+        self.cv_edit.setFont(QFont("Consolas", 12))
+        cv_layout.addWidget(self.cv_edit)
+        
+        save_cv_btn = QPushButton("Save CV")
+        save_cv_btn.setStyleSheet("background-color: #2E8B57; color: white; font-weight: bold; padding: 10px;")
+        save_cv_btn.clicked.connect(self.save_cv_data)
+        cv_layout.addWidget(save_cv_btn)
+
+        # Stacked Widget to switch between Project Editor and CV Editor
+        self.stack = QStackedWidget()
+        self.stack.addWidget(scroll_area)      # Index 0: Project Editor
+        self.stack.addWidget(self.cv_editor_widget) # Index 1: CV Editor
+        
+        main_layout.addWidget(self.stack)
 
     def apply_dark_theme(self):
         palette = QPalette()
@@ -183,6 +214,27 @@ class PortfolioManager(QMainWindow):
                 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load data: {str(e)}")
+
+    def load_cv_data(self):
+        if not os.path.exists(CV_FILE):
+            # Create default if not exists
+            default_cv = {"content": "### New CV\n\nStart editing..."}
+            try:
+                with open(CV_FILE, 'w', encoding='utf-8') as f:
+                    json.dump(default_cv, f, indent=4)
+                self.cv_content = default_cv["content"]
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to create CV file: {str(e)}")
+                return
+        else:
+            try:
+                with open(CV_FILE, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    self.cv_content = data.get("content", "")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to load CV data: {str(e)}")
+        
+        self.cv_edit.setPlainText(self.cv_content)
 
     def migrate_data(self):
         modified = False
@@ -226,6 +278,7 @@ class PortfolioManager(QMainWindow):
             self.save_current_project_state_to_memory()
 
         self.current_project_index = index
+        self.stack.setCurrentIndex(0) # Switch to Project Editor view
         project = self.projects[index]
 
         self.fields['id'].setText(project.get('id', ''))
@@ -347,6 +400,21 @@ class PortfolioManager(QMainWindow):
             
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to save data: {str(e)}")
+
+    def show_cv_editor(self):
+        self.project_list.clearSelection()
+        self.current_project_index = None # Deselect project
+        self.stack.setCurrentIndex(1) # Switch to CV Editor view
+
+    def save_cv_data(self):
+        content = self.cv_edit.toPlainText()
+        try:
+            with open(CV_FILE, 'w', encoding='utf-8') as f:
+                json.dump({"content": content}, f, indent=4, ensure_ascii=False)
+            QMessageBox.information(self, "Success", "CV saved successfully!")
+            self.cv_content = content
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to save CV: {str(e)}")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
