@@ -109,7 +109,21 @@ class PortfolioManager(QMainWindow):
             if label == "Youtube URL": key = "youtubeUrl"
             
             line_edit = QLineEdit()
-            form_layout.addRow(QLabel(label + ":"), line_edit)
+            
+            if key == "youtubeUrl":
+                # Create a horizontal layout for the URL field and the Test button
+                h_layout = QHBoxLayout()
+                h_layout.addWidget(line_edit)
+                
+                test_btn = QPushButton("Test Link")
+                test_btn.setFixedWidth(80)
+                test_btn.clicked.connect(lambda: self.test_youtube_link(self.fields['youtubeUrl'].text()))
+                h_layout.addWidget(test_btn)
+                
+                form_layout.addRow(QLabel(label + ":"), h_layout)
+            else:
+                form_layout.addRow(QLabel(label + ":"), line_edit)
+                
             self.fields[key] = line_edit
 
         self.editor_layout.addLayout(form_layout)
@@ -415,6 +429,13 @@ class PortfolioManager(QMainWindow):
             self.cv_content = content
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to save CV: {str(e)}")
+
+    def test_youtube_link(self, url):
+        import webbrowser
+        if url:
+            webbrowser.open(url)
+        else:
+            QMessageBox.warning(self, "Warning", "No URL to test.")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

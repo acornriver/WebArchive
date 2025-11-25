@@ -2,7 +2,7 @@ import { projects } from '@/data/projects';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, PlayCircle, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -13,6 +13,13 @@ export async function generateStaticParams() {
     }));
 }
 
+function getYoutubeId(url: string | undefined): string | null {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const project = projects.find((p) => p.id === id);
@@ -21,9 +28,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         notFound();
     }
 
-    // Extract YouTube ID if present in description
-    const youtubeMatch = project.description.match(/https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
-    const videoId = youtubeMatch ? youtubeMatch[1] : null;
+    // Extract YouTube ID from youtubeUrl field first, then fallback to description regex
+    let videoId = getYoutubeId(project.youtubeUrl);
+
+    if (!videoId) {
+        const youtubeMatch = project.description.match(/https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
+        videoId = youtubeMatch ? youtubeMatch[1] : null;
+    }
 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black pb-24">
@@ -65,10 +76,23 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                     <div className="flex flex-col md:flex-row gap-8 md:items-start justify-between border-b border-white/10 pb-8 mb-8">
                         <div>
                             <h1 className="text-3xl md:text-5xl font-bold mb-4">{project.title}</h1>
-                            <div className="flex flex-wrap gap-4 text-sm md:text-base text-gray-400">
+                            <div className="flex flex-wrap gap-4 text-sm md:text-base text-gray-400 mb-6">
                                 <span className="flex items-center gap-2"><Calendar size={16} /> {project.year}</span>
                                 <span className="flex items-center gap-2"><Tag size={16} /> {project.category}</span>
                             </div>
+
+                            {project.youtubeUrl && (
+                                <a
+                                    href={project.youtubeUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full font-medium transition-colors"
+                                >
+                                    <PlayCircle size={20} />
+                                    Watch on YouTube
+                                    <ExternalLink size={14} className="opacity-70" />
+                                </a>
+                            )}
                         </div>
                     </div>
 
