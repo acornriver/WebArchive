@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, Calendar, Tag, PlayCircle, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 
 // This function generates the static paths for all projects at build time
 export async function generateStaticParams() {
@@ -98,7 +99,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
 
                     <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed">
                         <ReactMarkdown
-                            remarkPlugins={[remarkGfm]}
+                            remarkPlugins={[remarkGfm, remarkBreaks]}
                             components={{
                                 a: ({ node, ...props }) => <a {...props} className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer" />
                             }}

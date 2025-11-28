@@ -3,8 +3,9 @@ import json
 import os
 import shutil
 import re
+import markdown
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
-                             QListWidget, QLabel, QLineEdit, QTextEdit, QPushButton, 
+                             QListWidget, QLabel, QLineEdit, QTextEdit, QPlainTextEdit, QPushButton, 
                              QScrollArea, QFileDialog, QMessageBox, QFormLayout, QFrame, QCheckBox, QStackedWidget)
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QColor, QPalette
@@ -143,10 +144,34 @@ class PortfolioManager(QMainWindow):
 
         # Description
         self.editor_layout.addSpacing(10)
-        self.editor_layout.addWidget(QLabel("Description:"))
-        self.desc_edit = QTextEdit()
-        self.desc_edit.setMinimumHeight(150)
-        self.editor_layout.addWidget(self.desc_edit)
+        self.editor_layout.addWidget(QLabel("Description (Markdown Supported):"))
+        
+        desc_container = QWidget()
+        desc_layout = QHBoxLayout(desc_container)
+        desc_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Editor (Left)
+        self.desc_edit = QPlainTextEdit()
+        self.desc_edit.setMinimumHeight(200)
+        self.desc_edit.setPlaceholderText("Write your description here using Markdown...")
+        self.desc_edit.textChanged.connect(self.update_preview)
+        desc_layout.addWidget(self.desc_edit)
+        
+        # Preview (Right)
+        self.desc_preview = QTextEdit()
+        self.desc_preview.setMinimumHeight(200)
+        self.desc_preview.setReadOnly(True)
+        self.desc_preview.setPlaceholderText("Live Preview will appear here...")
+        self.desc_preview.setStyleSheet("background-color: #404040; color: #E0E0E0; padding: 10px;")
+        desc_layout.addWidget(self.desc_preview)
+        
+        self.editor_layout.addWidget(desc_container)
+
+        # Format Button (Optional utility)
+        self.format_btn = QPushButton("Auto-Format Description (Markdown)")
+        self.format_btn.setToolTip("Adds 2 spaces for line breaks and bolds [Artist Note]")
+        self.format_btn.clicked.connect(self.format_description)
+        self.editor_layout.addWidget(self.format_btn)
 
         # Image Management
         self.editor_layout.addSpacing(20)
@@ -159,7 +184,7 @@ class PortfolioManager(QMainWindow):
         self.editor_layout.addWidget(self.add_img_btn)
 
         self.editor_layout.addWidget(QLabel("Current Images (Paths):"))
-        self.image_list_edit = QTextEdit()
+        self.image_list_edit = QPlainTextEdit()
         self.image_list_edit.setPlaceholderText("One path per line...")
         self.image_list_edit.setMinimumHeight(100)
         self.editor_layout.addWidget(self.image_list_edit)
@@ -178,7 +203,7 @@ class PortfolioManager(QMainWindow):
         cv_label.setFont(QFont("Arial", 14, QFont.Weight.Bold))
         cv_layout.addWidget(cv_label)
         
-        self.cv_edit = QTextEdit()
+        self.cv_edit = QPlainTextEdit()
         self.cv_edit.setFont(QFont("Consolas", 12))
         cv_layout.addWidget(self.cv_edit)
         
@@ -336,6 +361,32 @@ class PortfolioManager(QMainWindow):
         
         img_text = self.image_list_edit.toPlainText().strip()
         project['images'] = [line.strip() for line in img_text.split('\n') if line.strip()]
+
+    def update_preview(self):
+        text = self.desc_edit.toPlainText()
+        html = markdown.markdown(text, extensions=['nl2br'])
+        self.desc_preview.setHtml(html)
+
+    def format_description(self):
+        text = self.desc_edit.toPlainText()
+        
+        # 1. Bold [Artist Note]
+        if "[Artist Note]" in text and "**[Artist Note]**" not in text:
+            text = text.replace("[Artist Note]", "**[Artist Note]**")
+            
+        # 2. Add 2 spaces to lines that don't end with space, to force line break in Markdown
+        lines = text.split('\n')
+        new_lines = []
+        for line in lines:
+            # Only add spaces if line has content and doesn't already end with spaces
+            if line.strip() and not line.endswith("  "):
+                new_lines.append(line + "  ")
+            else:
+                new_lines.append(line)
+        
+        formatted_text = "\n".join(new_lines)
+        self.desc_edit.setPlainText(formatted_text)
+        QMessageBox.information(self, "Formatted", "Added line breaks and bolded headers.")
 
     def add_new_project(self):
         new_id = f"p{len(self.projects)}"
