@@ -41,7 +41,7 @@
 * **Core:** React 
 * **Styling:** Custom CSS / Styled-components
 * **Deployment:** GitHub Pages / Cloudflare (Custom Domain - acornriver.work)
-* **Design Tool:** Adobe Creative Cloud / Figma
+* **Design Tool:** Adobe Creative Cloud / Figma / Gemini 3.0
 
 ---
 
