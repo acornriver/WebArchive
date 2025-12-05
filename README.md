@@ -38,9 +38,9 @@
 
 이 웹사이트는 작품의 몰입도를 높이고 심미적인 경험을 제공하기 위해 다음과 같은 기술을 기반으로 구축되었습니다.
 
-* **Core:** React (or HTML5/Canvas based on your setup)
+* **Core:** React 
 * **Styling:** Custom CSS / Styled-components
-* **Deployment:** GitHub Pages / Cloudflare (Custom Domain)
+* **Deployment:** GitHub Pages / Cloudflare (Custom Domain - acornriver.work)
 * **Design Tool:** Adobe Creative Cloud / Figma
 
 ---
