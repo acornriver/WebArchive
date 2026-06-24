@@ -2,9 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { getHeroProject } from '@/lib/project-mapping';
+
 export default function HeroSection() {
-    // Extract video ID from URL if needed, but we know it is iBMpqVptw4k for p11
-    const videoId = "iBMpqVptw4k";
+    const project = getHeroProject();
+    
+    // Extract video ID and start time from youtubeUrl if it exists
+    let videoId = "iBMpqVptw4k"; // fallback
+    let startTime = 0;
+    if (project?.youtubeUrl) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = project.youtubeUrl.match(regExp);
+        if (match && match[2].length === 11) {
+            videoId = match[2];
+        }
+
+        const tMatch = project.youtubeUrl.match(/[?&](t|start)=(\d+)/);
+        if (tMatch) {
+            startTime = parseInt(tMatch[2], 10);
+        }
+    }
+
+    const title = project ? project.title.replace(/^\d+\s+/, '') : '철의 언어v2';
+    const category = project ? project.category : 'Interactive Sound Performance';
+    const projectId = project ? project.id : 'p17';
 
     return (
         <section className="relative h-screen w-full overflow-hidden bg-black">
@@ -12,7 +33,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
                 <iframe
                     className="w-full h-full scale-[1.35] object-cover"
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&playsinline=1`}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&playsinline=1${startTime ? `&start=${startTime}` : ''}`}
                     allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
                     title="Background Video"
                     style={{ pointerEvents: 'none' }}
@@ -32,8 +53,8 @@ export default function HeroSection() {
                     <h2 className="text-sm md:text-base uppercase tracking-[0.2em] text-gray-400 mb-4">
                         Media Artist acornriver
                     </h2>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6">
-                        오브<br />메모리 오브
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6 whitespace-pre-line">
+                        {title}
                     </h1>
                 </motion.div>
 
@@ -43,10 +64,10 @@ export default function HeroSection() {
                     transition={{ delay: 0.5, duration: 1 }}
                     className="text-lg md:text-2xl text-gray-300 mb-10 font-light max-w-2xl"
                 >
-                    Interactive Sound Performance
+                    {category}
                 </motion.p>
 
-                <Link href="/project/p11">
+                <Link href={`/project/${projectId}`}>
                     <motion.button
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
