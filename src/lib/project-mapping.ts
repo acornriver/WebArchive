@@ -2,9 +2,9 @@ import { projects } from '@/data/projects';
 import { Project } from '@/types';
 
 // 1. Hero Section: "From Trace to Memory"
-// Target: p11 (오브메모리오브)
+// Target: p17 (철의언어v2)
 export const getHeroProject = (): Project | undefined => {
-    return projects.find(p => p.id === 'p11');
+    return projects.find(p => p.id === 'p17');
 };
 
 // 2. Featured Highlights: Credibility & Awards
