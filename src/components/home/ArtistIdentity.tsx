@@ -39,7 +39,7 @@ export default function ArtistIdentity() {
 
                 {/* Right Column: CV & Contact */}
                 <div className="lg:col-span-7">
-                    <div className="prose prose-invert max-w-none text-gray-300">
+                    <div className="prose prose-invert max-w-none text-gray-300 break-words [overflow-wrap:anywhere] [word-break:break-word]">
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             components={{

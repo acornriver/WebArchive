@@ -97,11 +97,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                         </div>
                     </div>
 
-                    <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed">
+                    <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed break-words [overflow-wrap:anywhere] [word-break:break-word]">
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm, remarkBreaks]}
                             components={{
-                                a: ({ node, ...props }) => <a {...props} className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer" />
+                                a: ({ node, ...props }) => <a {...props} className="text-blue-400 hover:text-blue-300 underline break-all" target="_blank" rel="noopener noreferrer" />,
+                                p: ({ node, ...props }) => <p {...props} className="break-words [overflow-wrap:anywhere] [word-break:break-word]" />,
+                                pre: ({ node, ...props }) => <pre {...props} className="whitespace-pre-wrap break-words [overflow-wrap:anywhere] [word-break:break-word] overflow-x-auto" />
                             }}
                         >
                             {project.description}

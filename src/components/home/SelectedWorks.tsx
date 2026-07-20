@@ -85,7 +85,7 @@ export default function SelectedWorks() {
                                             {item.focus}
                                         </div>
 
-                                        <p className="text-gray-400 leading-relaxed text-lg">
+                                        <p className="text-gray-400 leading-relaxed text-lg break-words [overflow-wrap:anywhere]">
                                             {item.project.description.substring(0, 150)}...
                                         </p>
 

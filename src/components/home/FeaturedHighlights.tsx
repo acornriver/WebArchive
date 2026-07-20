@@ -68,7 +68,7 @@ export default function FeaturedHighlights() {
                                 <p className="text-lg text-indigo-300 font-medium flex items-center gap-2">
                                     {primary.highlightTag}
                                 </p>
-                                <p className="text-gray-400 line-clamp-3 leading-relaxed">
+                                <p className="text-gray-400 line-clamp-3 leading-relaxed break-words [overflow-wrap:anywhere]">
                                     {primary.project.description.split('\n')[0]}
                                 </p>
                                 <div className="pt-4 flex items-center text-sm font-medium uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
@@ -106,7 +106,7 @@ export default function FeaturedHighlights() {
                                 <p className="text-lg text-yellow-500 font-medium">
                                     {secondary.highlightTag}
                                 </p>
-                                <p className="text-gray-400 line-clamp-3 leading-relaxed">
+                                <p className="text-gray-400 line-clamp-3 leading-relaxed break-words [overflow-wrap:anywhere]">
                                     {secondary.project.description.split('\n')[0]}
                                 </p>
                                 <div className="pt-4 flex items-center text-sm font-medium uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
