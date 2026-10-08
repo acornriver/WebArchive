@@ -50,7 +50,7 @@
 협업 제안이나 작품 관련 문의는 아래 채널을 통해 연락 주시기 바랍니다.
 
 * **Email:** (minhyuk@acornriver.work)
-* **Instagram:** [@(acornriver_)](https://instagram.com/acornriver_)
+* **Instagram:** [@acornriver_](https://instagram.com/acornriver_)
 * **Business:** 아콘리버 미디어 랩 (Acornriver Media Lab)
 
 ---
