@@ -55,5 +55,5 @@
 
 ---
 
-### © 2025 Acornriver. All Rights Reserved.
+### © 2026 Acornriver. All Rights Reserved.
 이 저장소에 포함된 모든 코드, 이미지, 텍스트, 그리고 작품에 대한 저작권은 **Acornriver(민혁)**에게 있습니다.

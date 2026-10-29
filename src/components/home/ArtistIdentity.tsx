@@ -32,7 +32,7 @@ export default function ArtistIdentity() {
                     )}
 
                     <div className="text-sm text-gray-500 pt-8">
-                        <p>© 2025 acornriver. All rights reserved.</p>
+                        <p>© 2026 acornriver. All rights reserved.</p>
                         <p>Designed & Built by acornriver.</p>
                     </div>
                 </div>
