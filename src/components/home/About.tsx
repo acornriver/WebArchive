@@ -66,6 +66,18 @@ export default function About() {
                             </li>
                         ))}
                     </ul>
+
+                    <div className="mt-10 border-t border-line pt-3">
+                        <a
+                            href="https://www.youtube.com/watch?v=WlcsLKRqy1A"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-baseline gap-2 py-2 text-sm text-ash transition-colors hover:text-term"
+                        >
+                            <span className="meta">recommend song</span>
+                            <span className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div className="cv md:col-span-7 md:col-start-6">

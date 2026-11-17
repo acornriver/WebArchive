@@ -68,15 +68,24 @@ export default function Playground() {
             const engine = Engine.create();
             const wall = (x: number, y: number, w: number, h: number) =>
                 Bodies.rectangle(x, y, w, h, { isStatic: true });
-            const bodies = sizes.map(({ w, h }, i) =>
-                Bodies.rectangle(w / 2 + Math.random() * Math.max(1, W - w), -80 - i * 110, w, h, {
-                    chamfer: { radius: h / 2 - 1 },
-                    angle: (Math.random() - 0.5) * 0.7,
-                    restitution: 0.35,
-                    friction: 0.4,
-                    frictionAir: 0.012,
-                })
-            );
+            const bodies = sizes.map(({ w, h }, i) => {
+                const body = Bodies.rectangle(
+                    w / 2 + Math.random() * Math.max(1, W - w),
+                    -80 - i * 110,
+                    w,
+                    h,
+                    {
+                        chamfer: { radius: h / 2 - 1 },
+                        angle: (Math.random() - 0.5) * 0.7,
+                        restitution: 0.35,
+                        friction: 0.4,
+                        frictionAir: 0.006,
+                    }
+                );
+                // Lower rotational inertia so grabbed pills swing and pivot naturally around the anchor point
+                Body.setInertia(body, body.inertia * 0.42);
+                return body;
+            });
             Composite.add(engine.world, [
                 wall(W / 2, H + WALL / 2, W + WALL * 2, WALL),
                 wall(-WALL / 2, 0, WALL, H * 8),
@@ -91,10 +100,14 @@ export default function Playground() {
             box.removeEventListener('touchmove', handlers.mousemove);
             box.removeEventListener('touchstart', handlers.mousedown);
             box.removeEventListener('touchend', handlers.mouseup);
-            Composite.add(
-                engine.world,
-                MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } })
-            );
+            const mouseConstraint = MouseConstraint.create(engine, {
+                mouse,
+                constraint: {
+                    stiffness: 0.065,
+                    damping: 0.05,
+                },
+            });
+            Composite.add(engine.world, mouseConstraint);
 
             Events.on(engine, 'collisionStart', (event) => {
                 const audio = audioRef.current;
@@ -142,6 +155,7 @@ export default function Playground() {
                         body.position.y - h / 2
                     }px) rotate(${body.angle}rad)`;
                 });
+
                 raf = requestAnimationFrame(step);
             };
             const play = () => {
