@@ -1,165 +1,163 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-
-const RING_COUNT = 26;
-const RING_STEP = 11;
-const BASE_CX = 320;
-const BASE_CY = 140;
+import { useEffect, useRef } from 'react';
 
 /**
- * Interactive Moiré pattern combining an analog concentric field with
- * a pointer-driven digital pulse field. As the two centers overlap,
- * continuous waves and discrete dashes interfere to visualize resonance.
+ * Pure optical Moiré interference sculpture.
+ * Two crisp, continuous concentric wave fields overlap without any bounding box.
+ * When aligned, they collapse into a single quiet circle; as they drift apart,
+ * bold hyperbolic interference fringes emerge in the space between them.
+ * Clicking briefly locks both fields into phase before releasing them back into interference.
  */
 export default function ResonanceMoire() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const movingGroupRef = useRef<SVGGElement>(null);
-    const targetRef = useRef({ x: 56, y: -12 });
-    const currentRef = useRef({ x: 56, y: -12 });
-    const pointerActiveRef = useRef(false);
-    const [phaseDelta, setPhaseDelta] = useState('0.57');
-    const [pulsing, setPulsing] = useState(false);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const pointerRef = useRef({ active: false, nx: 0.09, ny: -0.02 });
+    const currentRef = useRef({ nx: 0.09, ny: -0.02 });
+    const phaseLockRef = useRef(0);
 
     useEffect(() => {
+        const container = containerRef.current;
+        const canvas = canvasRef.current;
+        if (!container || !canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduceMotion) return;
-
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
         let raf = 0;
-        let lastLabelUpdate = 0;
 
-        const tick = (now: number) => {
-            // Subtle autonomous breathing when the pointer is not hovering
-            if (!pointerActiveRef.current) {
-                const t = now * 0.00055;
-                targetRef.current = {
-                    x: Math.cos(t) * 68,
-                    y: Math.sin(t * 1.3) * 28,
-                };
-            }
-
-            const cur = currentRef.current;
-            const tgt = targetRef.current;
-            cur.x += (tgt.x - cur.x) * 0.08;
-            cur.y += (tgt.y - cur.y) * 0.08;
-
-            if (movingGroupRef.current) {
-                movingGroupRef.current.style.transform = `translate3d(${cur.x.toFixed(2)}px, ${cur.y.toFixed(2)}px, 0)`;
-            }
-
-            if (now - lastLabelUpdate > 90) {
-                lastLabelUpdate = now;
-                const dist = Math.hypot(cur.x, cur.y);
-                setPhaseDelta((dist / 100).toFixed(2));
-            }
-
-            raf = requestAnimationFrame(tick);
+        const resize = () => {
+            const rect = container.getBoundingClientRect();
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = Math.max(1, Math.floor(rect.width));
+            height = Math.max(1, Math.floor(rect.height));
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
         };
 
-        raf = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(raf);
+        resize();
+        const ro = new ResizeObserver(resize);
+        ro.observe(container);
+
+        const drawFrame = (now: number) => {
+            if (!reduceMotion) {
+                if (!pointerRef.current.active) {
+                    const t = now * 0.0005;
+                    pointerRef.current.nx = Math.cos(t) * 0.12;
+                    pointerRef.current.ny = Math.sin(t * 1.25) * 0.07;
+                }
+
+                currentRef.current.nx += (pointerRef.current.nx - currentRef.current.nx) * 0.07;
+                currentRef.current.ny += (pointerRef.current.ny - currentRef.current.ny) * 0.07;
+                phaseLockRef.current *= 0.92;
+            }
+
+            const lock = phaseLockRef.current;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, width, height);
+
+            const maxRadius = Math.min(width * 0.34, height * 0.45);
+            const originX = width * 0.5;
+            const originY = height * 0.5;
+
+            // Symmetrical opposition around the center; click collapses offset toward 0 (phase lock)
+            const offsetX = currentRef.current.nx * width * 0.24 * (1 - lock);
+            const offsetY = currentRef.current.ny * height * 0.24 * (1 - lock);
+
+            const cxA = originX - offsetX;
+            const cyA = originY - offsetY;
+            const cxB = originX + offsetX;
+            const cyB = originY + offsetY;
+
+            const step = 3.4;
+            const count = Math.floor(maxRadius / step);
+
+            // Both fields use crisp continuous strokes so true optical Moiré fringes appear cleanly
+            ctx.setLineDash([]);
+            ctx.lineWidth = 0.85;
+
+            // Field A
+            for (let i = 1; i <= count; i++) {
+                const r = i * step;
+                const falloff = Math.pow(Math.max(0, 1 - r / maxRadius), 1.9);
+                const alpha = falloff * 0.34;
+                if (alpha < 0.008) continue;
+                ctx.strokeStyle = `rgba(233, 236, 231, ${alpha.toFixed(3)})`;
+                ctx.beginPath();
+                ctx.arc(cxA, cyA, r, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Field B (tiny 1.5% frequency difference creates secondary circular beat fringes)
+            for (let i = 1; i <= count; i++) {
+                const r = i * step * 1.015;
+                if (r > maxRadius) break;
+                const falloff = Math.pow(Math.max(0, 1 - r / maxRadius), 1.9);
+                const isHarmonic = i % 10 === 0;
+
+                if (isHarmonic) {
+                    const termAlpha = falloff * (0.24 + lock * 0.36);
+                    ctx.strokeStyle = `rgba(61, 255, 127, ${Math.min(1, termAlpha).toFixed(3)})`;
+                } else {
+                    const paperAlpha = falloff * 0.34;
+                    ctx.strokeStyle = `rgba(233, 236, 231, ${paperAlpha.toFixed(3)})`;
+                }
+
+                ctx.beginPath();
+                ctx.arc(cxB, cyB, r, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            if (!reduceMotion) {
+                raf = requestAnimationFrame(tick);
+            }
+        };
+
+        const tick = (now: number) => drawFrame(now);
+
+        if (reduceMotion) {
+            drawFrame(0);
+        } else {
+            raf = requestAnimationFrame(tick);
+        }
+
+        return () => {
+            cancelAnimationFrame(raf);
+            ro.disconnect();
+        };
     }, []);
 
-    const updateTargetFromClient = (clientX: number, clientY: number) => {
+    const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
         const el = containerRef.current;
         if (!el) return;
         const rect = el.getBoundingClientRect();
-        const nx = (clientX - rect.left) / rect.width - 0.5;
-        const ny = (clientY - rect.top) / rect.height - 0.5;
-        pointerActiveRef.current = true;
-        targetRef.current = {
-            x: nx * 240,
-            y: ny * 110,
-        };
+        pointerRef.current.active = true;
+        pointerRef.current.nx = (e.clientX - rect.left) / rect.width - 0.5;
+        pointerRef.current.ny = (e.clientY - rect.top) / rect.height - 0.5;
     };
 
-    const handleTriggerPulse = () => {
-        setPulsing(true);
-        setTimeout(() => setPulsing(false), 500);
+    const handlePhaseLock = () => {
+        phaseLockRef.current = 1;
     };
 
     return (
         <div className="md:col-span-8">
             <div
                 ref={containerRef}
-                onPointerMove={(e) => updateTargetFromClient(e.clientX, e.clientY)}
+                onPointerMove={handlePointerMove}
                 onPointerLeave={() => {
-                    pointerActiveRef.current = false;
+                    pointerRef.current.active = false;
                 }}
-                onClick={handleTriggerPulse}
+                onClick={handlePhaseLock}
                 role="img"
-                aria-label="물리적 파동과 디지털 신호가 만나 공명하는 인터랙티브 모아레 문양"
-                className="group relative h-52 w-full cursor-crosshair overflow-hidden border border-line bg-ink select-none md:h-64"
+                aria-label="두 개의 동심원 파동이 어긋나며 간섭 무늬를 만드는 인터랙티브 모아레 조형"
+                className="relative h-64 w-full cursor-crosshair select-none md:h-80"
             >
-                <svg
-                    viewBox="0 0 640 280"
-                    preserveAspectRatio="xMidYMid slice"
-                    className="h-full w-full"
-                    aria-hidden="true"
-                >
-                    {/* 1. Fixed Analog Resonance Field (Continuous Waves) */}
-                    <g opacity="0.32">
-                        {Array.from({ length: RING_COUNT }, (_, i) => {
-                            const r = (i + 1) * RING_STEP;
-                            return (
-                                <circle
-                                    key={`analog-${i}`}
-                                    cx={BASE_CX - 36}
-                                    cy={BASE_CY}
-                                    r={r}
-                                    fill="none"
-                                    stroke="var(--paper)"
-                                    strokeWidth="0.9"
-                                />
-                            );
-                        })}
-                    </g>
-
-                    {/* 2. Pointer-Driven Digital Interference Field (Discrete Pulse Rings) */}
-                    <g
-                        ref={movingGroupRef}
-                        style={{
-                            transform: 'translate3d(56px, -12px, 0)',
-                            willChange: 'transform',
-                        }}
-                    >
-                        {Array.from({ length: RING_COUNT }, (_, i) => {
-                            const r = (i + 1) * RING_STEP;
-                            const isCore = i < 4;
-                            const dash = i % 3 === 0 ? '2 4' : i % 2 === 0 ? '6 3' : undefined;
-                            return (
-                                <circle
-                                    key={`digital-${i}`}
-                                    cx={BASE_CX}
-                                    cy={BASE_CY}
-                                    r={r}
-                                    fill="none"
-                                    stroke={isCore || pulsing ? 'var(--term)' : 'var(--paper)'}
-                                    strokeOpacity={isCore ? 0.65 : 0.34}
-                                    strokeWidth={pulsing ? '1.35' : '0.95'}
-                                    strokeDasharray={dash}
-                                    className="transition-[stroke,stroke-width] duration-300"
-                                />
-                            );
-                        })}
-                    </g>
-                </svg>
-
-                {/* Subtle Edge Vignette */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/70 via-transparent to-ink/70" />
-
-                {/* Minimal Corner Telemetry */}
-                <div className="pointer-events-none absolute inset-x-4 bottom-3 flex items-center justify-between text-[11px] text-ash">
-                    <span className="meta">RESONANCE × MOIRÉ</span>
-                    <span className="meta tabular-nums">
-                        Δφ <span className="text-term">{phaseDelta}</span>
-                    </span>
-                </div>
+                <canvas ref={canvasRef} className="block h-full w-full" />
             </div>
-
-            <p className="mt-4 text-sm text-ash md:text-base">
-                울림은 흩어지고, 흔적만 남는다.
-            </p>
         </div>
     );
 }

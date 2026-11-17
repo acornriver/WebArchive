@@ -1308,5 +1308,20 @@
         "width": 1920
       }
     ]
+  },
+  "asset/WebIndependence/19 TaBaCo/thumbnail.jpg": {
+    "width": 1280,
+    "height": 720,
+    "src": "/media/6a6b38ca4f13cd48-1280.webp",
+    "variants": [
+      {
+        "src": "/media/6a6b38ca4f13cd48-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/6a6b38ca4f13cd48-1280.webp",
+        "width": 1280
+      }
+    ]
   }
 }

@@ -325,5 +325,18 @@
             "Film/Video",
             "Sound/Music"
         ]
+    },
+    {
+        "id": "p19",
+        "title": "19 TaBaCo",
+        "year": "2026",
+        "category": "Music",
+        "thumbnail": "asset/WebIndependence/19 TaBaCo/thumbnail.jpg",
+        "images": [],
+        "description": "타바코오 야메마시타\n타바코노 오모이\n오모이노 나카노 타바코와\n돈나 오모이닷탄 다로우\n오모이다세나이\n\n타바코오 야메마시타\n\nⓒ 2026. acornriver All rights reserved.",
+        "youtubeUrl": "https://www.youtube.com/watch?v=x4hGBFJd9UE",
+        "tags": [
+            "Sound/Music"
+        ]
     }
 ]
