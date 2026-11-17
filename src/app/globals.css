@@ -23,10 +23,6 @@
   --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background: var(--ink);
   color: var(--paper);
@@ -202,7 +198,23 @@ button:disabled { cursor: default; }
 .skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 100; padding: .75rem 1rem; background: var(--paper); color: var(--ink); }
 .skip-link:focus { top: 1rem; }
 .playground:focus-within [data-body]:focus-visible { z-index: 2; }
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .page-enter { animation: none; }
   *, *::before, *::after { transition-duration: 0s !important; }
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import SiteHeader from "@/components/SiteHeader";
+import SmoothHashScroll from "@/components/SmoothHashScroll";
 import "./globals.css";
 
 // 번호·연도·분류 같은 작은 정보에만 쓰는 고정폭
@@ -35,6 +37,8 @@ export default function RootLayout({
       </head>
       <body className={`${plexMono.variable} antialiased`}>
         <a href="#main-content" className="skip-link">본문으로 건너뛰기</a>
+        <SmoothHashScroll />
+        <SiteHeader />
         {children}
       </body>
     </html>

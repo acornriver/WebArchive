@@ -4,7 +4,6 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
-import SiteHeader from '@/components/SiteHeader';
 import WorkImage, { imageAsset } from '@/components/WorkImage';
 import { workDetails } from '@/data/work-details';
 import { works } from '@/lib/works';
@@ -44,7 +43,6 @@ export default async function ProjectDetail({ params }: Props) {
     ].filter(([, value]) => value);
     return (
         <main id="main-content" className="px-5 pb-10 md:px-10">
-            <SiteHeader />
             <header className="pt-28 pb-8 md:pt-40 md:pb-12">
                 <Link href="/#works" className="text-sm text-ash hover:text-term">← 전체 아카이브</Link>
                 <p className="meta mt-8 mb-3 text-ash">{work.number} / {project.year}</p>
