@@ -103,8 +103,8 @@ export default function Playground() {
             const mouseConstraint = MouseConstraint.create(engine, {
                 mouse,
                 constraint: {
-                    stiffness: 0.065,
-                    damping: 0.05,
+                    stiffness: 0.28,
+                    damping: 0.08,
                 },
             });
             Composite.add(engine.world, mouseConstraint);
@@ -141,6 +141,18 @@ export default function Playground() {
                 owed = Math.min(owed + now - last, STEP * 6);
                 last = now;
                 while (owed >= STEP) {
+                    const grabbed = mouseConstraint.body;
+                    const pinOffset = mouseConstraint.constraint.pointB;
+                    if (grabbed && pinOffset) {
+                        const pullX = mouse.position.x - (grabbed.position.x + pinOffset.x);
+                        const pullY = mouse.position.y - (grabbed.position.y + pinOffset.y);
+                        const gravityTorque = -pinOffset.x * 0.00055;
+                        const whipTorque = (pinOffset.x * pullY - pinOffset.y * pullX) * 0.000045;
+                        Body.setAngularVelocity(
+                            grabbed,
+                            grabbed.angularVelocity * 0.92 + gravityTorque + whipTorque
+                        );
+                    }
                     Engine.update(engine, STEP);
                     owed -= STEP;
                 }
