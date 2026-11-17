@@ -67,3 +67,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code 작업 메모 (로컬 전용)
+CLAUDE.md

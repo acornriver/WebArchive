@@ -1,17 +1,19 @@
-import HeroSection from '@/components/home/HeroSection';
-import FeaturedHighlights from '@/components/home/FeaturedHighlights';
-import SelectedWorks from '@/components/home/SelectedWorks';
-import ArchiveSection from '@/components/home/ArchiveSection';
-import ArtistIdentity from '@/components/home/ArtistIdentity';
+import SiteHeader from '@/components/SiteHeader';
+import Hero from '@/components/home/Hero';
+import Featured from '@/components/home/Featured';
+import Playground from '@/components/home/Playground';
+import Archive from '@/components/home/Archive';
+import About from '@/components/home/About';
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
-      <HeroSection />
-      <FeaturedHighlights />
-      <SelectedWorks />
-      <ArchiveSection />
-      <ArtistIdentity />
-    </main>
-  );
+    return (
+        <main>
+            <SiteHeader />
+            <Hero />
+            <Playground />
+            <Featured />
+            <Archive />
+            <About />
+        </main>
+    );
 }
