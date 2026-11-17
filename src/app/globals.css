@@ -193,3 +193,16 @@ body::after {
     animation: none;
   }
 }
+
+/* Navigation and keyboard access stay legible on moving images. */
+section[id] { scroll-margin-top: 6rem; }
+:focus-visible { outline: 2px solid var(--term); outline-offset: 6px; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+.skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 100; padding: .75rem 1rem; background: var(--paper); color: var(--ink); }
+.skip-link:focus { top: 1rem; }
+.playground:focus-within [data-body]:focus-visible { z-index: 2; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0s !important; }
+}

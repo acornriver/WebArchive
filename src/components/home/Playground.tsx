@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Matter from 'matter-js';
-import { FEATURED, HERO_ID, PROFILE, works } from '@/lib/works';
+import { FEATURED, HERO_ID, works } from '@/lib/works';
 
 const { Bodies, Body, Composite, Engine, Events, Mouse, MouseConstraint } = Matter;
 
@@ -54,6 +54,7 @@ export default function Playground() {
 
         const els = Array.from(box.querySelectorAll<HTMLElement>('[data-body]'));
         let stop: (() => void) | null = null;
+        let disposed = false;
 
         const build = () => {
             // 쌓이기 전, 줄지어 놓인 상태에서 크기를 잰다
@@ -172,7 +173,7 @@ export default function Playground() {
             ([entry]) => {
                 if (!entry.isIntersecting) return;
                 first.disconnect();
-                stop = build();
+                void document.fonts.ready.then(() => { if (box.isConnected && !disposed) stop = build(); });
             },
             { threshold: 0.25 }
         );
@@ -193,10 +194,13 @@ export default function Playground() {
         window.addEventListener('resize', onResize);
 
         return () => {
+            disposed = true;
             first.disconnect();
             clearTimeout(timer);
             window.removeEventListener('resize', onResize);
             stop?.();
+            void audioRef.current?.ctx.close();
+            audioRef.current = null;
         };
     }, []);
 
@@ -206,7 +210,7 @@ export default function Playground() {
     return (
         <section className="px-5 pt-24 md:px-10 md:pt-40">
             <div className="mb-5 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-                <p className="title max-w-3xl text-[7.5vw] leading-[1.2] md:text-[3.2vw]">{PROFILE.statement}</p>
+                <p className="title max-w-3xl text-[7.5vw] leading-[1.2] md:text-[3.2vw]">작업의 제목들을 만져보세요.</p>
                 <p className="text-ash">
                     <span className="[@media(pointer:coarse)]:hidden">제목을 잡아서 던져보세요.</span>
                     <span className="hidden [@media(pointer:coarse)]:inline">빈 곳을 두드려보세요.</span>{' '}
@@ -228,7 +232,7 @@ export default function Playground() {
                 className="playground relative h-[70svh] min-h-[460px] touch-pan-y overflow-hidden border-y border-line select-none"
                 onPointerDown={(e) => (downAt.current = { x: e.clientX, y: e.clientY })}
                 onClickCapture={(e) => {
-                    if (Math.hypot(e.clientX - downAt.current.x, e.clientY - downAt.current.y) > 6) {
+                    if (e.detail !== 0 && Math.hypot(e.clientX - downAt.current.x, e.clientY - downAt.current.y) > 6) {
                         e.preventDefault();
                         e.stopPropagation();
                     }

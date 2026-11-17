@@ -7,11 +7,11 @@ import About from '@/components/home/About';
 
 export default function Home() {
     return (
-        <main>
+        <main id="main-content">
             <SiteHeader />
             <Hero />
-            <Playground />
             <Featured />
+            <Playground />
             <Archive />
             <About />
         </main>

@@ -19,19 +19,19 @@ export default function Archive() {
         <section id="works" className="px-5 pt-28 md:px-10 md:pt-44">
             <div className="mb-12 flex flex-wrap items-baseline justify-between gap-x-10 gap-y-4 md:mb-20">
                 <h2 className="title text-[12vw] md:text-[5.6vw]">
-                    모든 작업 <span className="text-ash">{works.length}</span>
+                    모든 작업 <span className="text-ash">{listed.length}</span>
                 </h2>
-                <div role="tablist" aria-label="분류" className="flex flex-wrap gap-x-5 gap-y-1">
+                <div role="group" aria-label="작업 분류" className="flex flex-wrap gap-x-5 gap-y-1">
                     {ARCHIVE_TABS.map((tab) => {
                         const isOn = tab.tag === tag;
                         return (
                             <button
                                 key={tab.label}
                                 type="button"
-                                role="tab"
-                                aria-selected={isOn}
-                                onClick={() => setTag(tab.tag)}
-                                className={isOn ? 'text-term' : 'text-ash hover:text-paper'}
+                                aria-pressed={isOn}
+                                aria-controls="archive-results"
+                                onClick={() => { setTag(tab.tag); setHoverId(null); }}
+                                className={`min-h-11 ${isOn ? 'text-term' : 'text-ash hover:text-paper'}`}
                             >
                                 {tab.label}
                             </button>
@@ -40,7 +40,8 @@ export default function Archive() {
                 </div>
             </div>
 
-            <ol className="grid grid-cols-1 items-end gap-x-8 gap-y-16 md:grid-cols-12 md:gap-y-24">
+            <p role="status" className="sr-only">{listed.length}개의 작업</p>
+            <ol id="archive-results" className="grid grid-cols-1 items-end gap-x-8 gap-y-16 md:grid-cols-12 md:gap-y-24">
                 {listed.map((work, i) => {
                     const cell = LAYOUT[i % LAYOUT.length];
                     const id = work.project.id;
@@ -50,6 +51,8 @@ export default function Archive() {
                                 href={`/project/${id}`}
                                 onMouseEnter={() => setHoverId(id)}
                                 onMouseLeave={() => setHoverId(null)}
+                                onFocus={() => setHoverId(id)}
+                                onBlur={() => setHoverId(null)}
                                 className="group block"
                             >
                                 <div className="relative aspect-[4/3]">
@@ -60,6 +63,7 @@ export default function Archive() {
                                         alt={work.title}
                                         active={hoverId === id}
                                         mono
+                                        sizes="(min-width: 768px) 58vw, 100vw"
                                         settle={900}
                                     />
                                 </div>

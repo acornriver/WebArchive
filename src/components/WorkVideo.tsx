@@ -1,119 +1,118 @@
 'use client';
 
-import { RefObject, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import WorkImage from '@/components/WorkImage';
+
+export type VideoStatus = 'idle' | 'loading' | 'playing' | 'error';
+const YOUTUBE_ORIGIN = 'https://www.youtube.com';
 
 interface Props {
     videoId: string | null;
     start?: number;
     poster: string;
     alt: string;
-    // 주지 않으면 화면에 들어왔을 때 스스로 재생한다
     active?: boolean;
-    frameRef?: RefObject<HTMLIFrameElement | null>;
     priority?: boolean;
-    // 그림을 흑백으로 두었다가, 감싼 .group 에 마우스가 올라오면 색을 돌려준다
     mono?: boolean;
-    // 재생이 시작된 뒤 드러내기까지 기다리는 시간. 유튜브가 재생 직후 띄우는 버튼을 가리려는 것.
     settle?: number;
+    soundOn?: boolean;
+    retry?: number;
+    onStatus?: (status: VideoStatus) => void;
+    sizes?: string;
 }
 
-// 그림 자리에서 영상이 소리 없이 돈다. 틀을 꽉 채우고, 유튜브의 제목·버튼은 잘라낸다.
-export default function WorkVideo({ videoId, start = 0, poster, alt, active, frameRef, priority, mono, settle = 1600 }: Props) {
+// The poster remains visible until playback is confirmed. Offscreen players are removed.
+export default function WorkVideo({ videoId, start = 0, poster, alt, active, priority, mono,
+    settle = 1200, soundOn = false, retry = 0, onStatus, sizes = '100vw' }: Props) {
     const boxRef = useRef<HTMLDivElement>(null);
     const [inView, setInView] = useState(false);
-    const playing = Boolean(videoId) && (active ?? inView);
+    const [pageVisible, setPageVisible] = useState(true);
+    const [reduceMotion, setReduceMotion] = useState(true);
 
     useEffect(() => {
-        if (active !== undefined || !boxRef.current) return;
-        const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
-            threshold: 0.35,
-        });
-        observer.observe(boxRef.current);
-        return () => observer.disconnect();
-    }, [active]);
+        const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updateMotion = () => setReduceMotion(media.matches);
+        const updateVisibility = () => setPageVisible(!document.hidden);
+        updateMotion();
+        updateVisibility();
+        media.addEventListener('change', updateMotion);
+        document.addEventListener('visibilitychange', updateVisibility);
+        const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting && entry.intersectionRatio >= 0.35), { threshold: [0, 0.35] });
+        if (boxRef.current) observer.observe(boxRef.current);
+        return () => {
+            observer.disconnect();
+            media.removeEventListener('change', updateMotion);
+            document.removeEventListener('visibilitychange', updateVisibility);
+        };
+    }, []);
 
+    const playing = videoId && inView && pageVisible && active !== false && (!reduceMotion || retry > 0);
     return (
         <div ref={boxRef} className="video-box absolute inset-0 overflow-hidden bg-ink">
-            <Image
-                src={`/${poster}`}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes="100vw"
-                className={`object-cover ${
-                    mono ? 'grayscale transition duration-500 group-hover:grayscale-0' : ''
-                }`}
-            />
-            {playing && videoId && <Frame videoId={videoId} start={start} title={alt} frameRef={frameRef} settle={settle} />}
+            <WorkImage source={poster} alt={alt} priority={priority} sizes={sizes}
+                className={`absolute inset-0 h-full w-full object-cover ${mono ? 'grayscale transition duration-500 group-hover:grayscale-0 group-focus-visible:grayscale-0' : ''}`} />
+            {playing && <Frame key={`${videoId}-${retry}`} videoId={videoId} start={start} title={alt}
+                settle={settle} soundOn={soundOn} onStatus={onStatus} />}
         </div>
     );
 }
 
-// 유튜브가 '재생 중'이라고 알려온 뒤에 드러낸다. 그 전까지는 아래의 그림이 보인다.
-function Frame({
-    videoId,
-    start,
-    title,
-    frameRef,
-    settle,
-}: {
-    videoId: string;
-    start: number;
-    title: string;
-    frameRef?: RefObject<HTMLIFrameElement | null>;
-    settle: number;
+function Frame({ videoId, start, title, settle, soundOn, onStatus }: {
+    videoId: string; start: number; title: string; settle: number; soundOn: boolean;
+    onStatus?: (status: VideoStatus) => void;
 }) {
-    const ownRef = useRef<HTMLIFrameElement | null>(null);
+    const frameRef = useRef<HTMLIFrameElement>(null);
+    const loadedRef = useRef(false);
     const [shown, setShown] = useState(false);
-
+    const [failed, setFailed] = useState(false);
     useEffect(() => {
         let reveal: ReturnType<typeof setTimeout> | undefined;
+        let settled = false;
+        onStatus?.('loading');
+        const ask = setInterval(() => {
+            if (!loadedRef.current) return;
+            frameRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), YOUTUBE_ORIGIN);
+        }, 250);
+        const fail = () => {
+            clearInterval(ask);
+            clearTimeout(reveal);
+            setFailed(true);
+            onStatus?.('error');
+        };
+        const deadline = setTimeout(fail, 12000);
         const onMessage = (event: MessageEvent) => {
-            if (event.source !== ownRef.current?.contentWindow || typeof event.data !== 'string') return;
+            if (event.origin !== YOUTUBE_ORIGIN || event.source !== frameRef.current?.contentWindow || typeof event.data !== 'string') return;
             try {
-                if (JSON.parse(event.data).info?.playerState === 1 && !reveal) {
-                    reveal = setTimeout(() => setShown(true), settle);
+                const data = JSON.parse(event.data);
+                if (data.event === 'onError') { clearTimeout(deadline); fail(); return; }
+                const state = data.info?.playerState ?? (data.event === 'onStateChange' ? data.info : undefined);
+                if (state === 1 && !settled) {
+                    settled = true;
+                    clearTimeout(deadline);
+                    clearInterval(ask);
+                    reveal = setTimeout(() => { setShown(true); onStatus?.('playing'); }, settle);
                 }
-            } catch {
-                // 유튜브가 보낸 것이 아닌 메시지
-            }
+            } catch { /* Ignore non-player messages. */ }
         };
         window.addEventListener('message', onMessage);
-
-        // 플레이어가 준비되기 전에 보낸 요청은 버려지므로, 답이 올 때까지 되풀이해 묻는다.
-        const ask = setInterval(() => {
-            ownRef.current?.contentWindow?.postMessage(
-                JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }),
-                '*'
-            );
-        }, 250);
-        // 끝내 답이 없으면 그냥 보여준다
-        const giveUp = setTimeout(() => setShown(true), 6000);
-
         return () => {
-            window.removeEventListener('message', onMessage);
             clearInterval(ask);
-            clearTimeout(giveUp);
+            clearTimeout(deadline);
             clearTimeout(reveal);
+            window.removeEventListener('message', onMessage);
+            onStatus?.('idle');
         };
-    }, [settle]);
+    }, [onStatus, settle]);
 
-    return (
-        <iframe
-            ref={(node) => {
-                ownRef.current = node;
-                if (frameRef) frameRef.current = node;
-            }}
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&rel=0&playsinline=1&iv_load_policy=3&disablekb=1&enablejsapi=1${
-                start ? `&start=${start}` : ''
-            }`}
-            title={title}
-            allow="autoplay; encrypted-media"
-            tabIndex={-1}
-            className={`video-cover pointer-events-none transition-opacity duration-500 ${
-                shown ? 'opacity-100' : 'opacity-0'
-            }`}
-        />
-    );
+    useEffect(() => {
+        if (!shown) return;
+        frameRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: soundOn ? 'unMute' : 'mute', args: [] }), YOUTUBE_ORIGIN);
+    }, [shown, soundOn]);
+
+    if (failed) return null;
+    return <iframe ref={frameRef} onLoad={() => { loadedRef.current = true; }}
+        src={`${YOUTUBE_ORIGIN}/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&rel=0&playsinline=1&disablekb=1&enablejsapi=1&start=${start}`}
+        title={`${title} 미리보기`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin"
+        tabIndex={-1} aria-hidden="true"
+        className={`video-cover pointer-events-none transition-opacity duration-500 ${shown ? 'opacity-100' : 'opacity-0'}`} />;
 }
