@@ -70,7 +70,7 @@ export const ARCHIVE_TABS: { tag: string | null; label: string }[] = [
 export const PROFILE = {
     name: 'acornriver',
     realName: '강민혁',
-    statement: '물리적 공명을 디지털 노이즈로 치환하여 들어봅니다.',
+    statement: '울림은 흩어지고, 흔적만 남는다.',
     email: 'minhyuk@acornriver.work',
     links: [
         { label: 'Instagram', href: 'https://instagram.com/acornriver_' },

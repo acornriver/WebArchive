@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import WorkVideo from '@/components/WorkVideo';
-import { FEATURED, PROFILE, getWork } from '@/lib/works';
+import ResonanceMoire from '@/components/home/ResonanceMoire';
+import { FEATURED, getWork } from '@/lib/works';
 
 export default function Featured() {
     const reduceMotion = useReducedMotion();
@@ -21,7 +22,7 @@ export default function Featured() {
                     <h2 id="selected-heading" className="text-sm text-ash">주요 작업 / 2021–2026</h2>
                     <Link href="#works" className="mt-4 inline-block underline underline-offset-4 transition-colors hover:text-term">전체 아카이브 ↗</Link>
                 </div>
-                <p className="title max-w-4xl text-[8vw] leading-[1.2] md:col-span-8 md:text-[4.5vw]">{PROFILE.statement}</p>
+                <ResonanceMoire />
             </motion.div>
             <div className="space-y-4 md:space-y-6">
                 {FEATURED.map(({ id, where, line }) => {
