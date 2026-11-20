@@ -327,11 +327,37 @@
         ]
     },
     {
+        "id": "p20",
+        "title": "19 오늘 먹은 밥 | 今日食べたご飯",
+        "year": "2026",
+        "category": "Short Film",
+        "thumbnail": "asset/WebIndependence/19 오늘 먹은 밥/thumbnail.jpg",
+        "images": [],
+        "description": "노코시타쿠 나이데스네\n\nⓒ 2026. acornriver All rights reserved.",
+        "youtubeUrl": "https://www.youtube.com/watch?v=01d6lLjm7MQ",
+        "tags": [
+            "Film/Video"
+        ]
+    },
+    {
+        "id": "p21",
+        "title": "20 PALIOLIN",
+        "year": "2026",
+        "category": "Research / Test",
+        "thumbnail": "asset/WebIndependence/20 PALIOLIN/thumbnail.jpg",
+        "images": [],
+        "description": "MCP와 유니티와 함께하는 프로토타이핑\n\n프로토타이핑이 너무 쉽게 되는 세상이 되어서\n행복하다 나같이 상상을 많이 하는 사람이 살기에\n너무 좋은 세상 같다.\n\nⓒ 2026. acornriver All rights reserved.",
+        "youtubeUrl": "https://www.youtube.com/watch?v=qy5hLAI7eFA",
+        "tags": [
+            "Publication/Project"
+        ]
+    },
+    {
         "id": "p19",
-        "title": "19 TaBaCo",
+        "title": "21 TaBaCo",
         "year": "2026",
         "category": "Music",
-        "thumbnail": "asset/WebIndependence/19 TaBaCo/thumbnail.jpg",
+        "thumbnail": "asset/WebIndependence/21 TaBaCo/thumbnail.jpg",
         "images": [],
         "description": "타바코오 야메마시타\n타바코노 오모이\n오모이노 나카노 타바코와\n돈나 오모이닷탄 다로우\n오모이다세나이\n\n타바코오 야메마시타\n\nⓒ 2026. acornriver All rights reserved.",
         "youtubeUrl": "https://www.youtube.com/watch?v=x4hGBFJd9UE",

@@ -1309,7 +1309,37 @@
       }
     ]
   },
-  "asset/WebIndependence/19 TaBaCo/thumbnail.jpg": {
+  "asset/WebIndependence/19 오늘 먹은 밥/thumbnail.jpg": {
+    "width": 1280,
+    "height": 720,
+    "src": "/media/066caf82c848cfe1-1280.webp",
+    "variants": [
+      {
+        "src": "/media/066caf82c848cfe1-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/066caf82c848cfe1-1280.webp",
+        "width": 1280
+      }
+    ]
+  },
+  "asset/WebIndependence/20 PALIOLIN/thumbnail.jpg": {
+    "width": 1280,
+    "height": 720,
+    "src": "/media/e44e39a522fb7f28-1280.webp",
+    "variants": [
+      {
+        "src": "/media/e44e39a522fb7f28-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/e44e39a522fb7f28-1280.webp",
+        "width": 1280
+      }
+    ]
+  },
+  "asset/WebIndependence/21 TaBaCo/thumbnail.jpg": {
     "width": 1280,
     "height": 720,
     "src": "/media/6a6b38ca4f13cd48-1280.webp",

@@ -34,5 +34,7 @@ export const workDetails: Record<string, WorkDetails> = {
         summary: '철판은 송신자이자 수신자이자 공명체다. 마이크로 수음된 철판의 소리는 실시간으로 분석되어 공명 주파수 대역이 선택적으로 증폭되고, 다시 철판 위의 트랜스듀서를 통해 재생된다.',
     },
     p18: { medium: '음악 · 영상', role: '음악, 영상 제작', summary: 'utf8 - hexadecimal - decode - french' },
+    p20: { medium: '숏필름', role: '1인 제작', summary: '노코시타쿠 나이데스네' },
+    p21: { medium: '리서치 · 테스트', role: '1인 제작', materials: 'MCP, Unity', summary: 'MCP와 유니티와 함께하는 프로토타이핑' },
     p19: { medium: 'Music', summary: 'TaBaCo O YaMeMaShiTa' },
 };
